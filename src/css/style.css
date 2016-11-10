@@ -1,0 +1,43 @@
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td,hr,button,article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section {
+    margin:0;padding:0;
+}
+article, aside, details, figcaption, figure, footer, header, menu, nav, section{
+    display: block;
+}
+html {
+    font-size: 62.5%;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+}
+body {
+    background: #f2f2f2;
+    color: #333;
+}
+
+a { text-decoration: none;}
+ul,li { list-style-type: none;}
+a:hover{
+    color: #499dd7;
+}
+body,button,input,select,textarea {
+    font:12px/1.5 '宋体',tahoma,arial,"Hiragino Sans GB",\5b8b\4f53;
+}
+.clearfix:before, .clearfix:after {
+    display: table;
+    content: ""; 
+    line-height: 0;
+}
+.clearfix:after {
+   clear: both;
+} 
+.box{
+    width: 100%;
+    max-width: 600px;
+    display: flex;
+}
+.box-left,.box-right{
+    border: 6px solid #910004;
+}
+@media screen and (max-width:414px){
+    
+}

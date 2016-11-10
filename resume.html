@@ -1,0 +1,351 @@
+ <!DOCTYPE html>
+ <html>
+     <head>
+         <meta charset="utf-8">
+		 <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+     </head>
+     <style>
+        a { text-decoration: none;}
+        body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td,hr,button,article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section {
+            margin:0;padding:0;
+        }
+        article, aside, details, figcaption, figure, footer, header, menu, nav, section{
+            display: block;
+        }
+        html {
+            font-size: 100%;
+            -webkit-text-size-adjust: 100%;
+            -ms-text-size-adjust: 100%;
+        }
+        body {
+            background: #fff;
+            font-size: 14px;
+            color: #666;
+        }
+
+        a { text-decoration: none;}
+        ul,li { list-style-type: none;}
+        a:hover{
+            color: #499dd7;
+        }
+        body,button,input,select,textarea {
+            font-size: 12px;
+            font-family: 'Helvetica Neue',Helvetica,'Lucida Grande',Arial,'Hiragino Sans GB',微软雅黑,'WenQuanYi Micro Hei',STHeiti,SimSun,sans-serif;
+        }
+        .clearfix:before, .clearfix:after {
+            display: table;
+            content: ""; 
+            line-height: 0;
+        }
+        .clearfix:after {
+        clear: both;
+        } 
+        .box{
+            position: relative;
+            margin: 0 auto;
+            width: 100%;
+            height: 100%;
+            min-height: 800px;
+            max-width: 1200px;
+            display: flex;
+            display: -webkit-flex;
+            flex-wrap: wrap;
+            background: #f2f2f2;
+            border-right: 1px solid #eee;
+        }
+        .box-left{
+            /*position: absolute;
+            left: 0;
+            width: 300px;*/
+            flex: 0 1 23%;
+            -webkit-flex: 1 1 23%;
+            padding: 30px 10px;
+            background: #00bfa5;
+            /*background: #fbcec9;*/
+        }
+        .box-right{
+            flex: 3 3 73%;
+            -webkit-flex: 3 3 73%;
+            padding: 25px;
+            /*padding: 10px 10px 10px 310px;*/
+            box-sizing: border-box;  
+        }
+        .head{
+            text-align: center;
+        }
+        .head h1{
+            color: #333;
+        }
+        .head img{
+            width: 150px;
+        }
+        .brief{
+            margin-left: 20px;
+            width: 90%;
+        }
+        .brief dd{
+            line-height: 30px;
+            color: #fff;
+            font-size: 14px;
+        }
+        .brief dt{
+            line-height: 50px;
+            color: #9f3;
+            font-size: 18px;
+        }
+        .brief dt:before{
+            content: '';
+            background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACkAAAAgCAYAAACPb1E+AAACU0lEQVRYR+2YwXHTQBSGvyfNMNziDuJUgDAFWFQAVAC5RPaNVEDSQThlzAWnAkwFyAVYWSrAroBwzYz3MWtZE8WWHMkWBw/e8/N73/5vn/dfCXuwZA8YOUA21aVSJb9q0LrHfwPatthxX0zcVNEvGgQgR2dyO66SsxDSJbF43wRpZ0ks85O+mGmVpKsxaT6/KxCChiCtNEbvLJz3JRluylsIOdDOFOQYuFkmPbbMX1dVsxxqgfIH1IC4Db8FjoB3kUxGZaBrkK6A4t+CjiNJwoF2YpDuJshrDULBf7GuVAqlEAsaCzY+E2MymKyWwveeTBxw4VqDdAU9/B+gl5EkF0WQaYzXVSRMwR6tUqgigoG+UkWnPUlOdoZUdAjSXofSmSKmSKkq59dBurhIJqVDXFnJh4I6A4ktGoONtx2mLF/DkHppscNdoVbVbRSyznRXafM/UfIA2dTgHJQ8KFlnjEti/4e/IIyircyuNTE41xq0Pfyucz8KLUnd0McdrsWl40N/CrSeYYNTMXd1Opy3bIoGeX+6mmfbu3tmsWGda/AJH+lM7tKJO+unpx7iHNT7rZVU9HNPkkUrytZT5jbzkRZrMsM80M4FyCd3fJ6Ducf/vQ2kOze/ABPJ5GUeMPORIMHjZ8AiqpKPzEMC07RWarAr+0kXmBndTIkmzO2DoUiVBL0ibbfb8HkkyVUtyPSl6I3cs6HIR/pYk38G1BmmTMncb24imXzYlGPjxwF35ubgXnbTOgO0qeBSAAfVEuyoymYPXzDqHIOt291UkV3z7EW7/wJgLOMwbfMAIQAAAABJRU5ErkJggg==);
+            
+            margin: 2px 8px -3px -3px;
+            width: 20px;
+            height: 20px;
+            display: inline-block;
+            background-size: cover;
+        }
+        .brief label{
+            display: inline-block;
+            width: 100px;
+        }
+        .desc{
+            margin-top: 30px;
+            font-size: 16px;
+            line-height: 24px;
+            text-indent: 2rem;
+            color: #666;
+        }
+        .skill-bar-wrap {
+            display: inline-block;
+            height: 17px;
+            width: 150px;
+            background: #00796b;
+            -webkit-border-radius: 20px;
+            border-radius: 20px;
+        }
+        .skill-bar {
+            height: 17px;
+            background: #fff;
+            -webkit-border-radius: 20px 0 0 20px;
+            border-radius: 20px 0 0 20px;
+        }
+        @media screen and (max-width:414px){
+            
+        }
+        .info-item h3{
+            padding-bottom: 5px;
+            color: #00796b;
+            /*color: #9A0000;*/
+            font-size: 24px;
+            font-weight: normal;
+            border-bottom: 1px solid #00796b;
+        }
+        .info-item h3:before{
+            content: '';
+            background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAgCAYAAABgrToAAAAC4ElEQVRYR+2YT3ISQRTGf4+UqbiSG5gbiCeAnEA8QeLOoFWBHbjJZCPsxCpDXJITODmBcALxBuEGuNJoybNeN38GApOZ6MSU5i2nur/+5nvdr/t9wrpo7BdRKSEUUMkjmkfJg5z7KXqOMmCDPq87g5UwryoFxjwBtkG23RjDc3NlhOjIYYj2aJ70V2HIwsf6yxKMdxEpg5FJGKpGugvjU09i4wDYS4UBI1RDyJ3SetebruwJOmJ6iFC6REn57P7UlDMiYkroVJGHCX9hOFF8BHi1bS2XGR6tWLNHTmuWGaGxX4bch9kg1S+IhDAOaZ6EsQTqz7chZz9VRsRSOQ/VMyBkazMkaBux1RFU81xclCBXRtVwHkwG2hbYEeqV0IEbMWiztdmOBVy3kJGVjcBvz58BrfeTvZpQYxtmZL99rwJVR1T1rdCo9ECKoH2ancspToH/x4ZGOP1nBOuVPUSU5rE/zdeNTBS0mqfyyXPSAZqrRctFKq6ZELRSJfpx6SRbbTxKfWBujKBnawW4TatzlFjF7AmOn7q6BrszUq7Ia+3K2moTMieosuP2n0v7OPBlbBKqz2h1urFq3hhB91iQN0tXaI3mcfvvEsSl2FSzW2EaQ1SDK9W7kRQvy6N6lOoKzTzF8/12BuPqbSwzQ1T2bm+hnp7ixIVvaWDmKb4jeJ3URO/iOwV/V0HRx2tb0STYmRwSW7he8VdYqxO9QZJQWhyTGcH0VFbP+DcI+jayiLomfbHbS2BZOGmsjfz6o4hoYWahLGimPVQG3L/XX2h1YxVsvNgFrYIUEmbssmXh34EH4CyUhGG2h4Su4VpJ0PsreGsjEs5pmNgVs0dAjGXhMOIslCh45CE7f2DMeaiembMQIHK49JtD5zKY67TOubIJ3jZZtiw8lHcquuToxmJ4w8qUtpZ1antM6dQm5lGljcgBZhThGpz4J/ly0hYtC0t5N9X7b4rn++oAVXPWulaufgFqQy/zOvEfVgAAAABJRU5ErkJggg==);
+            margin: 2px 8px -1px -3px;
+            width: 25px;
+            height: 20px;
+            display: inline-block;
+            background-size: cover;
+        }
+        .base-list{
+            margin: 10px 0;
+            font-size: 16px;
+            line-height: 30px;
+        }
+        .base-list label{
+            margin-right: 5px;
+            font-weight: bold;
+            color: #333;
+        }
+        .base-list span{
+            color: #666;
+        }
+        .article-list{
+            margin: 10px 0;
+            font-size: 14px;
+            line-height: 20px;
+        }
+        .article-list h4{
+            margin: -10px 0 10px 0;
+            line-height: 17px;
+            font-size: 19px;
+            color: #00796b;
+        }
+        .experience{
+            position: relative;
+            margin-bottom: -10px;
+            padding: 10px 0 22px 10px;
+            border-left: 2px solid #00796b;
+        }
+        .experience p{
+            padding: 0 8px;
+            line-height: 24px;
+        }
+        .circle{
+            position: absolute;
+            left: -8px;
+            top: 0;
+            height: 14px;
+            width: 14px;
+            -webkit-border-radius: 100%;
+            border-radius: 100%;
+            background: #00796b;
+        }
+     </style>
+     <body>
+         <section class="box">
+             <div class="box-left">
+                 <div class="head">
+                    <img src="src/img/111.jpg"/>
+                    <h1>邵欢</h1>
+                 </div>
+                 <ul class="brief">
+                    <li>
+                        <dt>Contact. 联系方式</dt>
+                        <dd>电话: 15067179715</dd>
+                        <dd>邮箱: 944269199@qq.com</dd>
+                        <dd>微信: sh_123616</dd>
+                    </li> 
+                    <li>
+                        <dt>Application. 应聘岗位</dt>
+                        <dd>前端工程师</dd>
+                    </li>  
+                    <li>
+                        <dt>Tech. 技能点</dt>
+                        <dd>
+                            <label>JavaScript</label>
+                            <div class="skill-bar-wrap">
+                               <div class="skill-bar" style="width: 85%"></div>
+                            </div>
+                        </dd>
+                        <dd>
+                            <label>HTML</label>
+                            <div class="skill-bar-wrap">
+                               <div class="skill-bar" style="width: 75%"></div>
+                            </div></dd>
+                        <dd>
+                            <label>CSS</label>
+                            <div class="skill-bar-wrap">
+                               <div class="skill-bar" style="width: 75%"></div>
+                            </div>
+                        </dd>
+                    </li> 
+                   <li>
+                       <p class="desc">
+我是一个热爱前端、热爱工作，体力充沛，善于学习的前端工程师。
+我目前正在寻找前端工程师岗位，希望能为贵司献上我的绵薄之力！
+                       </p>
+                   </li>
+                 </ul>
+             </div>
+             <div class="box-right">
+                 <div class="info-item">
+                     <h3>Basic info. 基本信息</h3>
+                     <ul class="base-list">
+                         <li>
+                             <label>个人信息:</label><span>邵欢/26岁/女</span>
+                         </li>
+                         <li>
+                             <label>教育经历:</label><span>本科/杭州电子科技大学/通信工程</span>
+                         </li>
+                         <li>
+                             <label>英语:</label><span>CET-6</span>
+                         </li>
+                     </ul>
+                 </div>
+                 <div class="info-item">
+                     <h3>Experience. 项目与工作经验</h3>
+                     <ul class="article-list">
+                         <li class="experience">
+                             <h4>壹康复后台项目重构</h4>
+                             <div >
+                                 <i class="circle"></i>
+                                 <p>用了angularjs技术方案，配合gulp工具，新建和整理了很多共用的模板，</p>
+                                 <p>克服了各个功能代码冗余，格式不统一，速度慢效率低的困难，</p>
+                                 <p>最终让后台管理 这类需求变更可以极速研发、快速上线，研发成本大大降低。</p>
+                             </div>
+                         </li>
+                         <li class="experience">
+                             <h4>电视屏幕上的数据统计页面</h4>
+                             <div>
+                                 <i class="circle"></i>
+                                 <p>主要是拿地图展示理疗师位置，数量以及统计图。</p>
+                                 <p>从中掌握了对高德地图和echart插件的灵活运用，以及h5,canvas做了个仪表图。</p>
+                                 <p>顺便还有移动端简单的统计图，提升了css3和html5的水平。</p>
+                             </div>
+                         </li>
+                         <li class="experience">
+                             <h4>参与易通贷项目</h4>
+                             <div>
+                                 <i class="circle"></i>
+                                 <p>网址：http://www.etongdai.com/，我毕业后第一个网站项目，</p>
+                                 <p>技术包括css+html+javascript+jquery，还有一些插件，新手时期的项目比较乱，未考虑性能，还可优化</p>
+                                 <p>因为这个项目，我开始研究性能，框架，前端工具，收获颇多</p>
+                             </div>
+                         </li>
+                         <li class="experience">
+                             <h4>参与易通宝管理系统</h4>
+                             <div>
+                                 <i class="circle"></i>
+                                 <p>用EXTJS做了类似桌面的后台管理，</p>
+                                 <p>这个框架很重而且约束力强，与网上其他开源插件整合困难，但它不用管css和html，功能多且组件化，</p>
+                                 <p>用来给后台程序员做后台倒真是棒棒的。</p>
+                                 <p>从这次项目，对我原生js学习帮助挺大.</p>
+                             </div>
+                         </li>
+                     </ul>
+                 </div>
+                 <div class="info-item">
+                     <h3>Skill. 技能清单</h3>
+                     <ul class="article-list">
+                         <li class="experience">
+                             <h4>css+html+javascript</h4>
+                             <div >
+                                 <i class="circle"></i>
+                                 <p>能够编写语义化的HTML，模块化的CSS，完成复杂的页面布局，</p>
+                                 <p>对html5和css3也多有研究，可在移动端灵活运用</p>
+                                 <p>html和css对各个浏览器的兼容，也有丰富经验</p>
+                                 <p>掌握javascript，有多个小项目，都是用纯javascript写的</p>
+                                 <p>正在学习ECMAScript6</p>
+                             </div>
+                         </li>
+                         <li class="experience">
+                             <h4>框架和插件</h4>
+                             <div >
+                                 <i class="circle"></i>
+                                 <p>掌握Angularjs,easyUI,Extjs,jQueryjs,Backbonejs</p>
+                                 <p>熟悉Seajs,Vuejs</p>
+                                 <p>熟悉后台代码java</p>
+                             </div>
+                         </li>
+                         <li class="experience">
+                             <h4>工具</h4>
+                             <div>
+                                 <i class="circle"></i>
+                                 <p>熟悉github代码管理工具,gulp自动化构建工具</p>
+                                 <p>熟悉unbuntu系统</p>
+                                 <p>熟悉nginx配置</p>
+                                 <p>略通photoshop</p>
+                                 <p>正在学习webpack模块加载工具</p>
+                             </div>
+                         </li>
+                         <li class="experience">
+                             <h4>荣誉证书</h4>
+                             <div>
+                                 <i class="circle"></i>
+                                 <p>OCJP认证</p>
+                                 <p>计算机三级</p>
+                                 <p>大学奖学金</p>
+                                 <p>英语六级(498分)</p>
+                                 <p>中级网络工程师(128分/150分制)</p>
+                             </div>
+                         </li>
+
+                     </ul>
+                 </div>
+             </div>
+         </section>
+         <!--<script src="http://127.0.0.1:8080/bin/app.bundle.js" charset="utf-8"></script>-->
+     </body>
+ </html>
