@@ -1,0 +1,387 @@
+ <!DOCTYPE html>
+ <html>
+     <head>
+         <meta charset="utf-8">
+		 <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+     </head>
+     <style>
+        a { text-decoration: none;}
+        body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td,hr,button,article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section {
+            margin:0;padding:0;
+        }
+        article, aside, details, figcaption, figure, footer, header, menu, nav, section{
+            display: block;
+        }
+        html {
+            font-size: 100%;
+            -webkit-text-size-adjust: 100%;
+            -ms-text-size-adjust: 100%;
+        }
+        body {
+            background: #fff;
+            font-size: 14px;
+            color: #666;
+        }
+
+        a { text-decoration: none;}
+        ul,li { list-style-type: none;}
+        a:hover{
+            color: #499dd7;
+        }
+        body,button,input,select,textarea {
+            font-size: 12px;
+            font-family: 'Helvetica Neue',Helvetica,'Lucida Grande',Arial,'Hiragino Sans GB',微软雅黑,'WenQuanYi Micro Hei',STHeiti,SimSun,sans-serif;
+        }
+        .clearfix:before, .clearfix:after {
+            display: table;
+            content: ""; 
+            line-height: 0;
+        }
+        .clearfix:after {
+        clear: both;
+        } 
+        .box{
+            position: relative;
+            margin: 0 auto;
+            width: 100%;
+            height: 100%;
+            min-height: 800px;
+            max-width: 1200px;
+            display: flex;
+            display: -webkit-flex;
+            flex-wrap: wrap;
+            background: #f2f2f2;
+            border-right: 1px solid #eee;
+        }
+        .box-left{
+            /*position: absolute;
+            left: 0;
+            width: 300px;*/
+            flex: 0 1 23%;
+            -webkit-flex: 1 1 23%;
+            padding: 30px 10px;
+            background: #00bfa5;
+            /*background: #fbcec9;*/
+        }
+        .box-right{
+            flex: 3 3 73%;
+            -webkit-flex: 3 3 73%;
+            padding: 25px;
+            /*padding: 10px 10px 10px 310px;*/
+            box-sizing: border-box;  
+        }
+        .head{
+            text-align: center;
+        }
+        .head h1{
+            color: #333;
+        }
+        .head img{
+            width: 150px;
+        }
+        .brief{
+            margin-left: 20px;
+            width: 90%;
+        }
+        .brief dd{
+            line-height: 30px;
+            color: #fff;
+            font-size: 14px;
+        }
+        .brief dt{
+            line-height: 50px;
+            color: #9f3;
+            font-size: 18px;
+        }
+        .brief dt:before{
+            content: '';
+            background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACkAAAAgCAYAAACPb1E+AAACU0lEQVRYR+2YwXHTQBSGvyfNMNziDuJUgDAFWFQAVAC5RPaNVEDSQThlzAWnAkwFyAVYWSrAroBwzYz3MWtZE8WWHMkWBw/e8/N73/5vn/dfCXuwZA8YOUA21aVSJb9q0LrHfwPatthxX0zcVNEvGgQgR2dyO66SsxDSJbF43wRpZ0ks85O+mGmVpKsxaT6/KxCChiCtNEbvLJz3JRluylsIOdDOFOQYuFkmPbbMX1dVsxxqgfIH1IC4Db8FjoB3kUxGZaBrkK6A4t+CjiNJwoF2YpDuJshrDULBf7GuVAqlEAsaCzY+E2MymKyWwveeTBxw4VqDdAU9/B+gl5EkF0WQaYzXVSRMwR6tUqgigoG+UkWnPUlOdoZUdAjSXofSmSKmSKkq59dBurhIJqVDXFnJh4I6A4ktGoONtx2mLF/DkHppscNdoVbVbRSyznRXafM/UfIA2dTgHJQ8KFlnjEti/4e/IIyircyuNTE41xq0Pfyucz8KLUnd0McdrsWl40N/CrSeYYNTMXd1Opy3bIoGeX+6mmfbu3tmsWGda/AJH+lM7tKJO+unpx7iHNT7rZVU9HNPkkUrytZT5jbzkRZrMsM80M4FyCd3fJ6Ducf/vQ2kOze/ABPJ5GUeMPORIMHjZ8AiqpKPzEMC07RWarAr+0kXmBndTIkmzO2DoUiVBL0ibbfb8HkkyVUtyPSl6I3cs6HIR/pYk38G1BmmTMncb24imXzYlGPjxwF35ubgXnbTOgO0qeBSAAfVEuyoymYPXzDqHIOt291UkV3z7EW7/wJgLOMwbfMAIQAAAABJRU5ErkJggg==);
+            
+            margin: 2px 8px -3px -3px;
+            width: 20px;
+            height: 20px;
+            display: inline-block;
+            background-size: cover;
+        }
+        .brief label{
+            display: inline-block;
+            width: 100px;
+        }
+        .desc{
+            margin-top: 30px;
+            font-size: 16px;
+            line-height: 24px;
+            text-indent: 2rem;
+            color: #666;
+        }
+        .skill-bar-wrap {
+            display: inline-block;
+            height: 17px;
+            width: 150px;
+            background: #00796b;
+            -webkit-border-radius: 20px;
+            border-radius: 20px;
+        }
+        .skill-bar {
+            height: 17px;
+            background: #fff;
+            -webkit-border-radius: 20px 0 0 20px;
+            border-radius: 20px 0 0 20px;
+        }
+        @media screen and (max-width:414px){
+            
+        }
+        .info-item h3{
+            padding-bottom: 5px;
+            color: #00796b;
+            /*color: #9A0000;*/
+            font-size: 24px;
+            font-weight: normal;
+            border-bottom: 1px solid #00796b;
+        }
+        .info-item h3:before{
+            content: '';
+            background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAgCAYAAABgrToAAAAC4ElEQVRYR+2YT3ISQRTGf4+UqbiSG5gbiCeAnEA8QeLOoFWBHbjJZCPsxCpDXJITODmBcALxBuEGuNJoybNeN38GApOZ6MSU5i2nur/+5nvdr/t9wrpo7BdRKSEUUMkjmkfJg5z7KXqOMmCDPq87g5UwryoFxjwBtkG23RjDc3NlhOjIYYj2aJ70V2HIwsf6yxKMdxEpg5FJGKpGugvjU09i4wDYS4UBI1RDyJ3SetebruwJOmJ6iFC6REn57P7UlDMiYkroVJGHCX9hOFF8BHi1bS2XGR6tWLNHTmuWGaGxX4bch9kg1S+IhDAOaZ6EsQTqz7chZz9VRsRSOQ/VMyBkazMkaBux1RFU81xclCBXRtVwHkwG2hbYEeqV0IEbMWiztdmOBVy3kJGVjcBvz58BrfeTvZpQYxtmZL99rwJVR1T1rdCo9ECKoH2ancspToH/x4ZGOP1nBOuVPUSU5rE/zdeNTBS0mqfyyXPSAZqrRctFKq6ZELRSJfpx6SRbbTxKfWBujKBnawW4TatzlFjF7AmOn7q6BrszUq7Ia+3K2moTMieosuP2n0v7OPBlbBKqz2h1urFq3hhB91iQN0tXaI3mcfvvEsSl2FSzW2EaQ1SDK9W7kRQvy6N6lOoKzTzF8/12BuPqbSwzQ1T2bm+hnp7ixIVvaWDmKb4jeJ3URO/iOwV/V0HRx2tb0STYmRwSW7he8VdYqxO9QZJQWhyTGcH0VFbP+DcI+jayiLomfbHbS2BZOGmsjfz6o4hoYWahLGimPVQG3L/XX2h1YxVsvNgFrYIUEmbssmXh34EH4CyUhGG2h4Su4VpJ0PsreGsjEs5pmNgVs0dAjGXhMOIslCh45CE7f2DMeaiembMQIHK49JtD5zKY67TOubIJ3jZZtiw8lHcquuToxmJ4w8qUtpZ1antM6dQm5lGljcgBZhThGpz4J/ly0hYtC0t5N9X7b4rn++oAVXPWulaufgFqQy/zOvEfVgAAAABJRU5ErkJggg==);
+            margin: 2px 8px -1px -3px;
+            width: 25px;
+            height: 20px;
+            display: inline-block;
+            background-size: cover;
+        }
+        .base-list{
+            margin: 10px 0;
+            font-size: 16px;
+            line-height: 30px;
+        }
+        .base-list label{
+            margin-right: 5px;
+            font-weight: bold;
+            color: #333;
+        }
+        .base-list span{
+            color: #666;
+        }
+        .article-list{
+            margin: 10px 0;
+            font-size: 14px;
+            line-height: 20px;
+        }
+        .article-list h4{
+            margin: -10px 0 10px 0;
+            line-height: 17px;
+            font-size: 19px;
+            color: #00796b;
+        }
+        .experience{
+            position: relative;
+            margin-bottom: -10px;
+            padding: 10px 0 22px 10px;
+            border-left: 2px solid #00796b;
+        }
+        .experience p{
+            padding: 0 8px;
+            line-height: 24px;
+        }
+        .circle{
+            position: absolute;
+            left: -8px;
+            top: 0;
+            height: 14px;
+            width: 14px;
+            -webkit-border-radius: 100%;
+            border-radius: 100%;
+            background: #00796b;
+        }
+     </style>
+     <body>
+         <section class="box">
+             <div class="box-left">
+                 <div class="head">
+                    <img src="src/img/111.jpg"/>
+                    <h1>shaohuan</h1>
+                 </div>
+                 <ul class="brief">
+                    <li>
+                        <dt>Contact</dt>
+                        <dd>tel: 15067179715</dd>
+                        <dd>email: 944269199@qq.com</dd>
+                        <dd>wechat: sh_123616</dd>
+                    </li> 
+                    <li>
+                        <dt>Application</dt>
+                        <dd>Front-end Engineer</dd>
+                    </li>  
+                    <li>
+                        <dt>Tech</dt>
+                        <dd>
+                            <label>JavaScript</label>
+                            <div class="skill-bar-wrap">
+                               <div class="skill-bar" style="width: 85%"></div>
+                            </div>
+                        </dd>
+                        <dd>
+                            <label>HTML</label>
+                            <div class="skill-bar-wrap">
+                               <div class="skill-bar" style="width: 75%"></div>
+                            </div></dd>
+                        <dd>
+                            <label>CSS</label>
+                            <div class="skill-bar-wrap">
+                               <div class="skill-bar" style="width: 75%"></div>
+                            </div>
+                        </dd>
+                    </li> 
+                   <li>
+                       <p class="desc">
+                       I'm a front-end engineer who love web ,love working.
+                       I'm energetic and good at learning.
+                       I'm looking for a job of front-end engineer.
+                       Coming to hire me!
+                       </p>
+                   </li>
+                 </ul>
+             </div>
+             <div class="box-right">
+                 <div class="info-item">
+                     <h3>Basic info. </h3>
+                     <ul class="base-list">
+                         <li>
+                             <label>Personal information:</label><span>shaohuan/age26/female</span>
+                         </li>
+                         <li>
+                             <label>Education:</label><span>Undergraduate degrees/HD University/Communication engineering</span>
+                         </li>
+                         <li>
+                             <label>Foreign language:</label><span>CET-6</span>
+                         </li>
+                     </ul>
+                 </div>
+                 <div class="info-item">
+                     <h3>Experience.</h3>
+                     <ul class="article-list">
+                         <li class="experience">
+                             <h4>Rebuilding the project in the background of 1kf(2015.12-now)</h4>
+                             <div >
+                                 <i class="circle"></i>
+                                 <p>We rebuilt it with the angularjs teachnology program,and gulp tools.
+                                 We built and sort out many common components.</p>
+                                 <p>We solved the difficulty of code redundancy,formats differently,and low efficiency.</p>
+                                 <p>Finally,  the same requires can be developed more quickly,and the cost can be less.</p>
+                             </div>
+                         </li>
+                         <li class="experience">
+                             <h4>The official website about 1kf(2016.6)</h4>
+                             <div>
+                                 <i class="circle"></i>
+                                 <p>website：http://www.1kf.com/</p>
+                                 <p>I completed it with jquery,html,css,videojs,owl-carousel,css3 technology alone</p>
+                             </div>
+                         </li>
+                         <li class="experience">
+                             <h4>Data statisic pages on the TV screen(2016.4)</h4>
+                             <div>
+                                 <i class="circle"></i>
+                                 <p>It shows providers' position ,amount in the map,as well as statisic chart.</p>
+                                 <p>The technology includes application in Gaode Map and echart plug-ins.
+                                  in addtion , did an instrument chart by h5 and canvas.</p>
+                                 <p>Besides,I had completed an other item  about statisic in the mobile terminal  with html5 and css3.</p>
+                             </div>
+                         </li>
+                         <li class="experience">
+                             <h4>Physical fitness test with H5(2016.10)</h4>
+                             <div>
+                                 <i class="circle"></i>
+                                 <p>A few pages of physical fitness test,it interactive with app.</p>
+                                 <p>The function finished with the native javascript</p>
+                                 <p>It provides a template for those requires, and code is lightweight ,efficiency is high.</p>
+                             </div>
+                         </li>
+                         <li class="experience">
+                             <h4>Taking part in etongdai project(2015.1)</h4>
+                             <div>
+                                 <i class="circle"></i>
+                                 <p>website：http://www.etongdai.com/，the first  website project after after graduation. </p>
+                                 <p>The technology includes css,html,javascript and jquery，in addtion to it，we used many plug-ins  about jquery. It should be more efficient .</p>
+                                 <p>Because of it，I started to learn the Code performance，frame，tool.</p>
+                             </div>
+                         </li>
+                         <li class="experience">
+                             <h4>Taking part in etongbao management system(2014.1)</h4>
+                             <div>
+                                 <i class="circle"></i>
+                                 <p>A back-stage management  system by EXTJS， and it showes like desktop.</p>
+                                 <p>The EXTJS is heavy weight ,and it can't be integrated with other frame easily.However,it doesn't need you to do css and html work,moreover,it is muti-functional and componentize.</p>
+                                 <p>It is suitable for backend developers.</p>
+                                 <p>It helps me about native javascript.</p>
+                             </div>
+                         </li>
+                     </ul>
+                 </div>
+                 <div class="info-item">
+                     <h3>Skill. </h3>
+                     <ul class="article-list">
+                         <li class="experience">
+                             <h4>css+html+javascript</h4>
+                             <div >
+                                 <i class="circle"></i>
+                                 <p>Be able to write the semantic HTML, modular CSS, complete the complex page layout</p>
+                                 <p>There are much studies about html5 and css3,Flexible use of the mobile terminal</p>
+                                 <p>Be familiar with Browser compatibility</p>
+                                 <p>Mastering javascript. I had completed many projects with native javascript.</p>
+                                 <p>In process of ECMAScript6</p>
+                             </div>
+                         </li>
+                         <li class="experience">
+                             <h4>Frameworks and Plug-in</h4>
+                             <div >
+                                 <i class="circle"></i>
+                                 <p>Mastering Angularjs,easyUI,Extjs,jQueryjs,Backbonejs</p>
+                                 <p>Be familiar with Seajs,Vuejs</p>
+                                 <p>Be familiar with JAVA</p>
+                             </div>
+                         </li>
+                         <li class="experience">
+                             <h4>Tools</h4>
+                             <div>
+                                 <i class="circle"></i>
+                                 <p>Be familiar with  github,gulp tools</p>
+                                 <p>Be familiar with  unbuntu system</p>
+                                 <p>Be familiar with  nginx configuration</p>
+                                 <p>Little photoshop</p>
+                                 <p>Be learning webpack</p>
+                             </div>
+                         </li>
+                         <li class="experience">
+                             <h4>Certificate</h4>
+                             <div>
+                                 <i class="circle"></i>
+                                 <p>OCJP认证</p>
+                                 <p>Computer level three</p>
+                                 <p>College scholarship</p>
+                                 <p>CET-6(498)</p>
+                                 <p>Senior Network Engineer(128)</p>
+                             </div>
+                         </li>
+                     </ul>
+                 </div>
+                 <div class="info-item">
+                     <h3>Hobbies. </h3>
+                     <ul class="article-list">
+                         <li class="experience">
+                             <div >
+                                 <i class="circle"></i>
+                                 <p>Reading books about WEB.</p>
+                                 <p>I had read  &lt; &lt;High performance JavaScript&gt;&gt;,&lt; &lt;
+                                 jQuery Source Codes Analysis&gt;&gt;,&lt; &lt;Angularjs&gt;&gt; and so on.</p>
+                                 <p>Shopping</p>
+                                 <p>Watching TV,Raising a puppy... </p>
+                             </div>
+                         </li>
+
+                     </ul>
+                 </div>
+             </div>
+         </section>
+         <!--<script src="http://127.0.0.1:8080/bin/app.bundle.js" charset="utf-8"></script>-->
+     </body>
+ </html>
