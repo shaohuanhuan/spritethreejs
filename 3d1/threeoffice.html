@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset=utf-8>
+		<title>My first Three.js app</title>
+		<style>
+			body { margin: 0; }
+			canvas { width: 100%; height: 100% }
+		</style>
+	</head>
+	<body>
+		<script src="../three.min.js"></script>
+        <script src="../zepto.min.js"></script>
+		<script>
+            //根据官网一步步写的
+            // 渐行渐远的方块
+			var scene = new THREE.Scene();
+            var camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );//PerspectiveCamera透视相机
+            
+            //This is where the magic happens. In addition to the WebGLRenderer we use here, Three.js comes with a few others, often used as fallbacks for users with older browsers or for those who don't have WebGL support for some reason.
+            var renderer = new THREE.WebGLRenderer();
+            renderer.setSize( window.innerWidth, window.innerHeight );
+            renderer.setClearColor( 0xffffff);
+            document.body.appendChild( renderer.domElement );
+            //To create a cube, we need a BoxGeometry. This is an object that contains all the points (vertices) and fill (faces) of the cube. 包含平面，立方体的.
+            var geometry = new THREE.BoxGeometry( 1, 1, 1 );//画的块的长宽高
+            //给BoxGeometry添加颜色
+            var material = new THREE.MeshBasicMaterial( { color: 0x00ff00} );
+            var cube = new THREE.Mesh( geometry, material );
+            scene.add( cube );
+            
+            var lights = [];
+			lights[ 0 ] = new THREE.PointLight( 0xffffff, 1, 0 );
+			lights[ 1 ] = new THREE.PointLight( 0xffffff, 1, 0 );
+			lights[ 2 ] = new THREE.PointLight( 0xffffff, 1, 0 );
+
+			lights[ 0 ].position.set( 0, 200, 0 );
+			lights[ 1 ].position.set( 100, 200, 100 );
+			lights[ 2 ].position.set( - 100, - 200, - 100 );
+
+			scene.add( lights[ 0 ] );
+			scene.add( lights[ 1 ] );
+			scene.add( lights[ 2 ] );
+
+            camera.position.z = 5;
+            
+            function render() {
+				requestAnimationFrame( render );
+
+				cube.rotation.x += 0.01;//x方向，上下
+				cube.rotation.y += 0.01;//y方向，即左右
+                camera.position.z += 0.01;//远去
+
+				renderer.render(scene, camera);
+            }
+            render();
+           
+                    
+            // var scene = new THREE.Scene();
+            // var camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );//PerspectiveCamera透视相机
+            
+            // //This is where the magic happens. In addition to the WebGLRenderer we use here, Three.js comes with a few others, often used as fallbacks for users with older browsers or for those who don't have WebGL support for some reason.
+            // var renderer = new THREE.WebGLRenderer();
+            // renderer.setSize( window.innerWidth, window.innerHeight );
+            // document.body.appendChild( renderer.domElement );
+            // //To create a cube, we need a BoxGeometry. This is an object that contains all the points (vertices) and fill (faces) of the cube. 包含平面，立方体的.
+            // var geometry = new THREE.BoxGeometry( 1, 1, 1 );//画的块的长宽高
+            // //给BoxGeometry添加颜色
+            // var material = new THREE.MeshBasicMaterial( { color: 0x910004 } );
+            // var cube = new THREE.Mesh( geometry, material );
+            // scene.add( cube );
+
+            // camera.position.z = 5;
+            
+            // function render() {
+			// 	requestAnimationFrame( render );
+
+			// 	cube.rotation.x += 0.01;
+			// 	cube.rotation.y += 0.01;
+            //     camera.position.z += 0.01;
+
+			// 	renderer.render(scene, camera);
+            // }
+            // render();
+           
+        
+            //butterGeometryload failed 
+            /*var scene = new THREE.Scene();
+            var camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );//PerspectiveCamera透视相机
+            
+            //This is where the magic happens. In addition to the WebGLRenderer we use here, Three.js comes with a few others, often used as fallbacks for users with older browsers or for those who don't have WebGL support for some reason.
+            var renderer = new THREE.WebGLRenderer();
+            renderer.setSize( window.innerWidth, window.innerHeight );
+            document.body.appendChild( renderer.domElement );
+            //To create a cube, we need a BoxGeometry. This is an object that contains all the points (vertices) and fill (faces) of the cube. 包含平面，立方体的.
+            // instantiate a loader
+            var loader = new THREE.BufferGeometryLoader();
+
+            camera.position.z = 5;
+            // load a resource
+            loader.load(
+                // resource URL
+                'typeface.json',
+                // Function when resource is loaded
+                function ( geometry ) {
+                    var material = new THREE.MeshLambertMaterial( { color: 0xF5F5F5 } );
+                    var cube = new THREE.Mesh( geometry, material );
+                    scene.add( cube );
+                    
+                    function render() {
+                        requestAnimationFrame( render );
+
+                        cube.rotation.x += 0.01;
+                        cube.rotation.y += 0.01;
+                        camera.position.z += 0.01;
+
+                        renderer.render(scene, camera);
+                    }
+                    render();
+                },
+                // Function called when download progresses
+                function ( xhr ) {
+                    console.log( (xhr.loaded / xhr.total * 100) + '% loaded' );
+                },
+                // Function called when download errors
+                function ( xhr ) {
+                    console.log( 'An error happened' );
+                }
+            );
+            */
+            
+            
+		</script>
+	</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8"/>
+    <title></title>
+    <meta name="description" content=""/>
+    <!--<meta name="viewport" content="width=640, target-densitydpi=device-dpi, user-scalable=no"/>-->
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+
+    <style>
+        html, body {
+            background: #000000;
+            margin: 0px;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            font-family: "Helvetica Neue", Arial;
+        }
+
+        #main {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        #wechat {
+            position: absolute;
+            /*display: none;*/
+            opacity: 0;
+            width: 1px;
+            height: 1px;
+        }
+
+    </style>
+
+    <script>
+        // function parseUA() {
+        //     var u = navigator.userAgent;
+        //     var u2 = navigator.userAgent.toLowerCase();
+        //     return { //移动终端浏览器版本信息
+        //         trident: u.indexOf('Trident') > -1, //IE内核
+        //         presto: u.indexOf('Presto') > -1, //opera内核
+        //         webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+        //         gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+        //         mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+        //         ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+        //         android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或uc浏览器
+        //         iPhone: u.indexOf('iPhone') > -1, //是否为iPhone或者QQHD浏览器
+        //         iPad: u.indexOf('iPad') > -1, //是否iPad
+        //         webApp: u.indexOf('Safari') == -1, //是否web应该程序，没有头部与底部
+        //         iosv: u.substr(u.indexOf('iPhone OS') + 9, 3),
+        //         weixin: u2.match(/MicroMessenger/i) == "micromessenger",
+        //         ali: u.indexOf('AliApp') > -1,
+        //     };
+        // }
+        // var ua = parseUA();
+
+        // if (!ua.mobile) {
+        //     location.href = './pc.html';
+        // }
+
+    </script>
+
+
+    <script src="three.min.js"></script>
+    <script src="zepto.min.js"></script>
+    <!--<script src="./impublic/js/libs/stats.min.js"></script>-->
+
+</head>
+<body>
+    <img id="wechat" src="http://invite.jeejoy.com/wechat.jpg"/>
+
+    <div id="main"></div>
+
+    <audio id="bgm" src="./impublic/sound/bgm.mp3" loop preload="auto"></audio>
+
+    <script src="main.js?v=13"></script>
+
+</body>
+</html>

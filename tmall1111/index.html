@@ -1,0 +1,2033 @@
+<!DOCTYPE html>
+<html >
+<head>
+<meta  charset="UTF-8"/>
+<script>
+!function(e,t){function i(){var t=n.getBoundingClientRect().width;t/m>540&&(t=540*m);var i=t/10;n.style.fontSize=i+"px",d.rem=e.rem=i}var a,r=e.document,n=r.documentElement,o=r.querySelector('meta[name="viewport"]'),l=r.querySelector('meta[name="flexible"]'),m=0,s=0,d=t.flexible||(t.flexible={});if(o){console.warn("将根据已有的meta标签来设置缩放比例");var p=o.getAttribute("content").match(/initial\-scale=([\d\.]+)/);p&&(s=parseFloat(p[1]),m=parseInt(1/s))}else if(l){var c=l.getAttribute("content");if(c){var u=c.match(/initial\-dpr=([\d\.]+)/),f=c.match(/maximum\-dpr=([\d\.]+)/);u&&(m=parseFloat(u[1]),s=parseFloat((1/m).toFixed(2))),f&&(m=parseFloat(f[1]),s=parseFloat((1/m).toFixed(2)))}}if(!m&&!s){var v=(e.navigator.appVersion.match(/android/gi),e.navigator.appVersion.match(/iphone/gi)),h=e.devicePixelRatio;m=v?h>=3&&(!m||m>=3)?3:h>=2&&(!m||m>=2)?2:1:1,s=1/m}if(n.setAttribute("data-dpr",m),!o)if(o=r.createElement("meta"),o.setAttribute("name","viewport"),o.setAttribute("content","initial-scale="+s+", maximum-scale="+s+", minimum-scale="+s+", user-scalable=no"),n.firstElementChild)n.firstElementChild.appendChild(o);else{var x=r.createElement("div");x.appendChild(o),r.write(x.innerHTML)}e.addEventListener("resize",function(){clearTimeout(a),a=setTimeout(i,300)},!1),e.addEventListener("pageshow",function(e){e.persisted&&(clearTimeout(a),a=setTimeout(i,300))},!1),"complete"===r.readyState?r.body.style.fontSize=12*m+"px":r.addEventListener("DOMContentLoaded",function(){r.body.style.fontSize=12*m+"px"},!1),i(),d.dpr=e.dpr=m,d.refreshRem=i,d.rem2px=function(e){var t=parseFloat(e)*this.rem;return"string"==typeof e&&e.match(/rem$/)&&(t+="px"),t},d.px2rem=function(e){var t=parseFloat(e)/this.rem;return"string"==typeof e&&e.match(/px$/)&&(t+="rem"),t}}(window,window.lib||(window.lib={}));
+</script>
+<meta name="viewport" content="initial-scale=0.3333333333333333, maximum-scale=0.3333333333333333, minimum-scale=0.3333333333333333, user-scalable=no">
+<title></title>
+
+
+<!--主要样式-->
+<link rel="stylesheet" href="css/style.css" media="screen" type="text/css" />
+<script type="text/javascript" async="" src="js/index.js"></script>
+
+
+</head>
+
+<body>
+<div id="good-shop-box" class="notified">
+    <div class="pagination-wrapper" id="pagination-wrapper">
+    </div>
+    <ul id="shop-list" class="shop-list">
+   </ul>
+</div>
+<script id="categorys-template" type="text/html">
+  <div class="category-box">
+    <div class="item-wrapper">
+    {{each categoryRows as value i}}
+        <div class="category-row">
+            {{each value as valuex i}}
+            <a href="javascript:void(0);" data-categoryId="{{valuex.categoryId}}" class="category-item t-{{valuex.categoryId}}" data-href="{{valuex.categoryUrl}}">
+                <div class="logo lib-img" data-size="200" data-src="{{valuex.categoryLogoUrl}}" >
+                    <div class="active-mask"></div>
+                </div>
+                <p class="name">{{valuex.categoryName}}</p>
+            </a>
+            {{/each}}
+        </div>
+    {{/each}}
+    </div>
+    <footer class="close-dock">收起</footer>
+  </div>
+</script>
+<script id="shops-list-template" type="text/html">
+
+{{if (!type || type === "CARD")}}
+  <section class="shop-item" data-index="{{index}}" data-shopId="{{shopId}}">
+    <header>
+      <a class="title baby" href="javascript:void(0);" data-href="{{banner.shopUrl}}">
+        <div class="shop-logo lib-img" data-src="{{banner.shopLogoUrl}}" style="background-image:url('//gw.alicdn.com/tps/i4/TB1xWDkGVXXXXXAaXXX_67SUXXX-732-732.png')"></div>
+        <div class="shop-info-wrapper">
+          {{if (banner.isGoldShop=="true")}}
+            <p class="ellipsis shop-name" data-shopname = "{{banner.shopName}}">{{banner.shopName}}</p>
+            <i class="gold-shop"></i>
+          {{else}}
+          <p class="ellipsis shop-name no-gold-icon" data-shopname = "{{banner.shopName}}">{{banner.shopName}}</p>
+          
+          {{/if}}
+          <div class="shop-level">
+            {{if (shopBottom.isFiveShop)}}
+            <span>{{shopBottom.isFiveShop}}</span>
+            {{/if}}
+            <i class="lib-img" data-src="{{shopBottom.shopLeveImg}}"></i>
+          </div>
+        </div>
+        <div class="button-wrapper">
+          <button class="shop-entry">进入店铺</button>
+        </div>
+      </a>
+    </header>
+    <div class="item">
+        {{each shopItems as value i}}
+        {{if (i==1)}}
+        <!--<div class="left">-->
+        <a href="javascript:void(0);" data-itemId="{{value.itemId}}" data-href="{{value.itemUrl}}" class="baby top lib-img" data-src="{{value.itemLogoUrl}}" style="background-image:url('//gw.alicdn.com/tps/i4/TB1xWDkGVXXXXXAaXXX_67SUXXX-732-732.png')">
+            <!--<img src="{{value.itemLogoUrl}}">-->
+        </a>
+        {{/if}}
+        {{if (i==2)}}
+        <a href="javascript:void(0);" data-itemId="{{value.itemId}}" data-href="{{value.itemUrl}}" class="baby bottom  lib-img" data-src="{{value.itemLogoUrl}}" style="background-image:url('//gw.alicdn.com/tps/i4/TB1xWDkGVXXXXXAaXXX_67SUXXX-732-732.png')">
+            <!--<img src="{{value.itemLogoUrl}}">-->
+        </a>
+        <!--</div>-->
+        {{/if}}
+        {{if (i==0)}}
+        <a href="javascript:void(0);" data-itemId="{{value.itemId}}" data-href="{{value.itemUrl}}" class="baby right lib-img" data-size="400" data-src="{{value.itemLogoUrl}}" style="background-image:url('//gw.alicdn.com/tps/i4/TB1xWDkGVXXXXXAaXXX_67SUXXX-732-732.png')">
+        </a>
+        {{/if}}
+        {{/each}}
+    </div>
+    </div>
+    <div class="ellipsis message">{{shopBottom.recomandReason}}</div>
+    {{if (double11Shop == "true")}}
+        <div class="festival-label xxx"></div>
+    {{/if}}
+    <footer class="x"><span data-shopId="{{shopId}}" class="button similar-shop-btn">其它相似好店</span></footer>
+  </section>
+  {{/if}}
+
+  {{if type === "TOPIC"}}
+    <section class="shop-item topic-item-wrapper"  data-index="{{index}}" data-topicId="{{subjectRecommend.subjectId}}">
+        <div class="topic-item-flag"></div>
+        <a href="javascript:void (0);" class="topic-item topic-img-item lib-img" data-src='{{subjectRecommend.subjectLogoUrl}}' data-size="750" style="background-image:url('//gw.alicdn.com/tps/i4/TB1xWDkGVXXXXXAaXXX_67SUXXX-732-732.png')">
+            <!--<img class="shop-icon" src="{{subjectLogoUrl}}" />-->
+        </a>
+        <div class="box-center topic-detail-box">
+            <div class="description-wrapper {{if (subjectRecommend.recomandNick)}} has-nick{{/if}}">
+                <div class="topic-info-wrapper"><header class="ellipsis topic-name" >{{subjectRecommend.subjectName}}</header><b class="shop-count">{{subjectRecommend.shopTotalNum}}家店</b></div>
+                {{if (subjectRecommend.recomandNick)}}
+                <a href="javascript:void (0);" data-href="{{subjectRecommend.recomandUrl}}" class="account-box">
+                    <img src="//gw.alicdn.com/tps/i4/TB1xWDkGVXXXXXAaXXX_67SUXXX-732-732.png" data-src="{{subjectRecommend.recomandHeadUrl}}" class="lib-img" /><span>{{subjectRecommend.recomandNick}} </span><span class="holder">推荐</span>
+                </a>
+                {{/if}}
+            </div>
+        </div>
+        <div class="box-center shop-products">
+            {{if (subjectRecommend.subjectShopItems && subjectRecommend.subjectShopItems.length > 0)}}
+                {{each subjectRecommend.subjectShopItems as value i}}
+                    <a href="javascript:void (0);" data-src='{{value.itemLogoUrl}}' style="background-image:url('//gw.alicdn.com/tps/i4/TB1xWDkGVXXXXXAaXXX_67SUXXX-732-732.png')" class="topic-item product-item lib-img">
+                        <!--<img src="{{value.itemLogoUrl}}" />-->
+                    </a>
+                {{/each}}
+            {{else}}
+                <a href="javascript:void (0);" class="topic-item product-item no-item-holder">
+                    <img data-size="400" src="//gw.alicdn.com/tps/i4/TB1xWDkGVXXXXXAaXXX_67SUXXX-732-732.png" data-src="{{subjectRecommend.fillPicUrl}}" class="lib-img"/>
+                </a>
+            {{/if}}
+        </div>
+        </section>
+    {{/if}}
+
+    {{if type === "LAST_CARD"}}
+        <section class="shop-item last-card"  data-index="{{index}}">
+          <div class="topic-pic-wrapper">
+            <div class="group-banner">
+                <div class="group-hot-box lib-img" data-size="750" data-src="{{addCardDTO.firstPicUrl}}" style="background-image:url('//gw.alicdn.com/tps/i4/TB1xWDkGVXXXXXAaXXX_67SUXXX-732-732.png')">
+                </div>
+                <div class="item-wrapper">
+                 {{each addCardDTO.lastPageList as vaue i}}
+                    <div class="pic lib-img" data-size="320" data-src="{{vaue}}" style="background-image: url(//gw.alicdn.com/bao/uploaded/i4/TB1zoLnHVXXXXXBXpXXXXXXXXXX_!!0-item_pic.jpg_320x320q90s150.jpg_.webp);"></div>
+                    {{/each}}
+                </div>
+            </div>
+
+          <div class="mask-wrapper">
+            <div class="logo"></div>
+            <p class="label">你已看完这个时间段的好店！</p>
+            <p class="next-time">下次更新时间</p>
+            <p class="next-date">{{addCardDTO.updateTime}}</p>
+            <a href="//h5.m.taobao.com/findgoodshop/topic.html" class="topic-entry">
+                <p>看更多</p>
+                <p>专题推荐</p>
+            </a>
+            <a class="feedback-entry" href="//hitest.cloudtest.taobao.com/front/m/questionnaire/detail.htm?taskId=160141418369088447&app=taobao4android"><i></i>意见反馈</a>
+          </div>
+        </section>
+    {{/if}}
+</script>
+<footer class="box-center nav"><a href="javascript:void(0);" class="tab-shop on"><b></b>发现好店</a><a href="javascript:void(0);" class="tab-topic"><b></b>专题推荐</a></footer>
+
+<!-- <div id="good-shop-box" class="notified">
+    <div class="pagination-wrapper" id="pagination-wrapper">
+    	<div class="update">又捕获 </div>
+    	<div class="page-number" style="-webkit-transform: rotateY(180deg);">
+    		<div id="page-info" style="-webkit-transform: rotateY(180deg);" class="">
+    			<span>5</span>/ <b>40</b>
+    		</div>
+    	</div>
+    	<div class="shops"> 好店呦</div>
+    </div>
+    <ul id="shop-list" class="shop-list">
+    	<li class="shop-wrapper" data-id="4" style="-webkit-transform-origin: 0px 100% 0px; z-index: 3; opacity: 1; -webkit-transform: translate3d(0px, 31.05px, 0px) rotate3d(0, 0, 1, 0deg) scale3d(1, 1, 1);">
+			  <section class="shop-item" data-index="5" data-shopid="33886820">
+			    <header>
+			      <a class="title baby" href="javascript:void(0);" data-href="//shop.m.taobao.com/shop/shop_index.htm?shop_id=33886820&amp;scm=1007.10756.16866.100200300001000&amp;pvid=4677321f-494a-4c63-a6e6-a577a6ac6832">
+			        <div class="shop-logo" style="background-image: url(https://gw.alicdn.com/bao/uploaded//e1/a5/T19wCQFqVcXXb1upjX.jpg_320x320q90s150.jpg_.webp);" data-src-checked="true"></div>
+			        <div class="shop-info-wrapper">
+			          
+			            <p class="ellipsis shop-name" data-shopname="书生海味店">书生海味店</p>
+			            <i class="gold-shop"></i>
+			          
+			          <div class="shop-level">
+			            
+			            <span>10年老店</span>
+			            
+			            <i class="" data-src-checked="true" style="background-image: url(https://gw.alicdn.com/tps/i4/TB1HK5LFpXXXXaRcXXX3e.oIVXX-78-24.png_320x320.jpg_.webp);"></i>
+			          </div>
+			        </div>
+			        <div class="button-wrapper">
+			          <button class="shop-entry">进入店铺</button>
+			        </div>
+			      </a>
+			    </header>
+			    <div class="item">
+			        <a href="javascript:void(0);" data-itemid="17488847005" data-href="//a.m.taobao.com/i17488847005.htm?scm=1007.10756.16866.100200300001001&amp;pvid=4677321f-494a-4c63-a6e6-a577a6ac6832" class="baby right" data-size="400" style="background-image: url(https://gw.alicdn.com/bao/uploaded/i4/TB1cOqMGVXXXXahXFXXXXXXXXXX_!!0-item_pic.jpg_468x468q90s150.jpg_.webp);" data-src-checked="true">
+			        </a>
+			        <a href="javascript:void(0);" data-itemid="44402200570" data-href="//a.m.taobao.com/i44402200570.htm?scm=1007.10756.16866.100200300001001&amp;pvid=4677321f-494a-4c63-a6e6-a577a6ac6832" class="baby top" style="background-image: url(https://gw.alicdn.com/bao/uploaded/i2/TB1te8jJFXXXXcEXpXXXXXXXXXX_!!0-item_pic.jpg_320x320q90s150.jpg_.webp);" data-src-checked="true">
+			        </a>
+			        
+			        <a href="javascript:void(0);" data-itemid="19788721762" data-href="//a.m.taobao.com/i19788721762.htm?scm=1007.10756.16866.100200300001001&amp;pvid=4677321f-494a-4c63-a6e6-a577a6ac6832" class="baby bottom " style="background-image: url(https://gw.alicdn.com/bao/uploaded/i3/T1u1XOFGBXXXXXXXXX_!!0-item_pic.jpg_320x320q90s150.jpg_.webp);" data-src-checked="true">
+			        </a>
+			        
+			    </div>
+			    
+			    <div class="ellipsis message">一个月被收藏了3559次，一定有好东西！</div>
+			    
+			    <footer class="x"><span data-shopid="33886820" class="button similar-shop-btn">其它相似好店</span></footer>
+			  </section>
+
+       </li>
+       <li class="shop-wrapper" data-id="5" style="-webkit-transform-origin: 0px 100% 0px; z-index: 2; opacity: 0.7; -webkit-transform: translate3d(32.6025px, -77.625px, 0px) rotate3d(0, 0, 1, 0deg) scale3d(0.94, 0.94, 1);">
+			  <section class="shop-item" data-index="6" data-shopid="112523772">
+			    <header>
+			      <a class="title baby" href="javascript:void(0);" data-href="//shop.m.taobao.com/shop/shop_index.htm?shop_id=112523772&amp;scm=1007.10756.16866.100200300001000&amp;pvid=4677321f-494a-4c63-a6e6-a577a6ac6832">
+			        <div class="shop-logo" style="background-image: url(https://gw.alicdn.com/bao/uploaded//d1/68/TB1qZXxHVXXXXctXpXXtKXbFXXX.gif_320x320q90s150.jpg_.webp);" data-src-checked="true"></div>
+			        <div class="shop-info-wrapper">
+			          
+			          <p class="ellipsis shop-name no-gold-icon" data-shopname="食婶旗舰店">食婶旗舰店</p>
+			          
+			          
+			          <div class="shop-level">
+			            
+			            <i class="" data-src-checked="true" style="background-image: url(https://gw.alicdn.com/tps/i4/TB1AHnTGVXXXXX2XVXX083BIpXX-193-36.png_320x320.jpg_.webp);"></i>
+			          </div>
+			        </div>
+			        <div class="button-wrapper">
+			          <button class="shop-entry">进入店铺</button>
+			        </div>
+			      </a>
+			    </header>
+			    <div class="item">
+			        <a href="javascript:void(0);" data-itemid="45214682224" data-href="//a.m.taobao.com/i45214682224.htm?scm=1007.10756.16866.100200300001001&amp;pvid=4677321f-494a-4c63-a6e6-a577a6ac6832" class="baby right" data-size="400" style="background-image: url(https://gw.alicdn.com/bao/uploaded/i4/TB1EstCIFXXXXXlXXXXXXXXXXXX_!!0-item_pic.jpg_468x468q90s150.jpg_.webp);" data-src-checked="true">
+			        </a>
+			        <a href="javascript:void(0);" data-itemid="45274052892" data-href="//a.m.taobao.com/i45274052892.htm?scm=1007.10756.16866.100200300001001&amp;pvid=4677321f-494a-4c63-a6e6-a577a6ac6832" class="baby top" style="background-image: url(https://gw.alicdn.com/bao/uploaded/i1/TB1fXwCKFXXXXcRXXXXXXXXXXXX_!!0-item_pic.jpg_320x320q90s150.jpg_.webp);" data-src-checked="true">
+			           
+			        </a>
+			        
+			        
+			        <a href="javascript:void(0);" data-itemid="45241384828" data-href="//a.m.taobao.com/i45241384828.htm?scm=1007.10756.16866.100200300001001&amp;pvid=4677321f-494a-4c63-a6e6-a577a6ac6832" class="baby bottom " style="background-image: url(https://gw.alicdn.com/bao/uploaded/i2/TB1e2U3FFXXXXcBXpXXXXXXXXXX_!!0-item_pic.jpg_320x320q90s150.jpg_.webp);" data-src-checked="true">
+			            
+			        </a>
+			        
+			    </div>
+			    
+			    <div class="ellipsis message">好评率100%，神店！</div>
+			    
+			    <footer class="x"><span data-shopid="112523772" class="button similar-shop-btn">其它相似好店</span></footer>
+			  </section>
+
+       </li>
+       <li class="shop-wrapper" data-id="6" style="-webkit-transform-origin: 0px 100% 0px; z-index: 1; opacity: 0.4; -webkit-transform: translate3d(65.205px, -186.3px, 0px) rotate3d(0, 0, 1, 0deg) scale3d(0.88, 0.88, 1);">
+			  <section class="shop-item" data-index="7" data-shopid="60513188">
+			    <header>
+			      <a class="title baby" href="javascript:void(0);" data-href="//shop.m.taobao.com/shop/shop_index.htm?shop_id=60513188&amp;scm=1007.10756.16866.100200300001000&amp;pvid=4677321f-494a-4c63-a6e6-a577a6ac6832">
+			        <div class="shop-logo" style="background-image: url(https://gw.alicdn.com/bao/uploaded//25/27/TB17zu1IFXXXXcrXpXXSutbFXXX.jpg_320x320q90s150.jpg_.webp);" data-src-checked="true"></div>
+			        <div class="shop-info-wrapper">
+			          
+			          <p class="ellipsis shop-name no-gold-icon" data-shopname="梦想家制">梦想家制</p>
+			          
+			          
+			          <div class="shop-level">
+			            
+			            <span>6年老店</span>
+			            
+			            <i class="" data-src-checked="true" style="background-image: url(https://gw.alicdn.com/tps/i3/TB1ElSoFXXXXXX6bpXX97kJ_XXX-105-24.png_320x320.jpg_.webp);"></i>
+			          </div>
+			        </div>
+			        <div class="button-wrapper">
+			          <button class="shop-entry">进入店铺</button>
+			        </div>
+			      </a>
+			    </header>
+			    <div class="item">
+			        
+			        <a href="javascript:void(0);" data-itemid="40468157211" data-href="//a.m.taobao.com/i40468157211.htm?scm=1007.10756.16866.100200300001001&amp;pvid=4677321f-494a-4c63-a6e6-a577a6ac6832" class="baby right" data-size="400" style="background-image: url(https://gw.alicdn.com/bao/uploaded/i3/TB18zt1JpXXXXXLXXXXXXXXXXXX_!!0-item_pic.jpg_468x468q90s150.jpg_.webp);" data-src-checked="true">
+			        </a>
+			        <a href="javascript:void(0);" data-itemid="40455832383" data-href="//a.m.taobao.com/i40455832383.htm?scm=1007.10756.16866.100200300001001&amp;pvid=4677321f-494a-4c63-a6e6-a577a6ac6832" class="baby top" style="background-image: url(https://gw.alicdn.com/bao/uploaded/i1/TB1h_IfJpXXXXaKXpXXXXXXXXXX_!!0-item_pic.jpg_320x320q90s150.jpg_.webp);" data-src-checked="true">
+			          
+			        </a>
+			        
+			        <a href="javascript:void(0);" data-itemid="44860688032" data-href="//a.m.taobao.com/i44860688032.htm?scm=1007.10756.16866.100200300001001&amp;pvid=4677321f-494a-4c63-a6e6-a577a6ac6832" class="baby bottom " style="background-image: url(https://gw.alicdn.com/bao/uploaded/i3/TB1MeRNKpXXXXXfXVXXXXXXXXXX_!!0-item_pic.jpg_320x320q90s150.jpg_.webp);" data-src-checked="true">
+			           
+			        </a>
+			        
+			        
+			        
+			    </div>
+			    
+			    <div class="ellipsis message"> 这家店评分很高，服务一定赞！ </div>
+			    
+			    <footer class="x"><span data-shopid="60513188" class="button similar-shop-btn">其它相似好店</span></footer>
+			  </section>
+       </li>
+    </ul>
+</div> -->
+
+<!-- <script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="js/script.js"></script> -->
+
+<script src="js/aplus_wap.js" keeplive=""></script>
+<script src="js/spm_wap.js" keeplive=""></script>
+<script src="js/spmact_wap.js?v=1709426092_31918" keeplive=""></script>
+
+<script src="js/zepto.1.0.4.js?v=2536997710_25774" keeplive=""></script>
+
+<script src="js/env.js" keeplive=""></script>
+<script src="js/promise.js" keeplive=""></script>
+<script src="js/gesture.js" keeplive=""></script>
+<script src="js/bridge.js" keeplive=""></script>
+<script src="js/mtop.js" keeplive=""></script>
+<script src="js/login.js" keeplive=""></script>
+<script src="js/error.js" keeplive=""></script>
+<script>
+!
+function() {
+    function e(e) {
+        var t = e.touches,
+        a = e.changedTouches,
+        i = t && t.length ? t[0] : a && a.length ? a[0] : null,
+        o = i.pageX || i.clientX,
+        n = i.pageY || i.clientY;
+        return {
+            touch: i,
+            x: o,
+            y: n
+        }
+    }
+    function t(e, t, a) {
+        return a = a || document,
+        t ? a.querySelectorAll(e) : a.querySelector(e)
+    }
+    function a(e, t, a) {
+        e.style.webkitTransform = o(t)
+    }
+    function i(e, t) {
+        e.style.webkitTransformOrigin = t ? "100% 100% 0": "0 100% 0"
+    }
+    function o(e) {
+        e.x = e.x || 0,
+        e.y = e.y || 0,
+        e.pivotX = e.pivotX || 0,
+        e.pivotY = e.pivotY || 0,
+        e.rotation = e.rotation || 0,
+        e.scaleX = e.scaleX || 1,
+        e.scaleY = e.scaleY || 1;
+        var t = l,
+        a = t ? "3d": "";
+        return "translate" + a + "(" + (e.x - e.pivotX) + "px, " + (e.y - e.pivotY) + (t ? "px, 0)": "px)") + "rotate" + a + (t ? "(0, 0, 1, ": "(") + e.rotation + "deg)scale" + a + "(" + e.scaleX + ", " + e.scaleY + (t ? ", 1)": ")")
+    }
+    function n(e, t, a, i) {
+        var o = document.createEvent("HTMLEvents");
+        o.initEvent(a, !1, !0),
+        o.data = i,
+        o.eventTarget = t || e,
+        e.dispatchEvent(o)
+    }
+    var r = window,
+    s = r.innerWidth,
+    l = (r.innerHeight, !1); !
+    function() {
+        var e = document,
+        t = e.head,
+        a = e.documentElement,
+        i = e.createElement("div"),
+        o = i.style,
+        n = (void 0 != o.webkitTransform, void 0 != o.webkitPerspective);
+        n && (i.id = "test3d", o = e.createElement("style"), o.textContent = "@media(-webkit-transform-3d){#test3d{height:3px}}", t.appendChild(o), a.appendChild(i), n = 3 == i.offsetHeight, t.removeChild(o), a.removeChild(i)),
+        l = n
+    } ();
+    var c = r.SwipeCard = function(e) {
+        this.init(e)
+    };
+    c.prototype = {
+        container: null,
+        cards: null,
+        noBackSwipePage: 1,
+        cardWidth: 0,
+        cardHeight: 0,
+        showMaxCount: 3,
+        showIndex: 0,
+        pageNumber: 0,
+        isAndroid: !1,
+        offsetY: 5,
+        offsetScale: .06,
+        transitionDuration: 300,
+        swipeOutDistance: 80,
+        swipeInDistance: 10,
+        init: function(a) {
+            var i = this;
+            for (var o in a) i[o] = a[o];
+            i.isAndroid && (i.swipeInDistance = 5);
+            var n = i.container;
+            "string" == typeof n && (n = t(n)),
+            i.container = n,
+            n.addEventListener("touchstart",
+            function(t) {
+                var a = e(t);
+                i.startX = a.x,
+                i.startY = a.y,
+                i.touchEnd = !1
+            },
+            !1),
+            n.addEventListener("touchmove",
+            function(t) {
+                var a = e(t),
+                o = a.x - i.startX,
+                n = a.y - i.startY,
+                r = Math.abs(o) > Math.abs(n);
+                r && (this.isHorizontal = !0),
+                r && 0 > o && i._moveCard(o),
+                this.isHorizontal && t.preventDefault()
+            },
+            !1),
+            n.addEventListener("touchend",
+            function(t) {
+                var a = e(t),
+                o = a.x - i.startX,
+                n = a.y - i.startY,
+                r = Math.abs(o) > 0 ? !0 : Math.abs(o) >= Math.abs(n);
+                r && o <= -i.swipeInDistance ? (i.swipeLeft = !0, i._swipeOut()) : r && o >= i.swipeOutDistance ? (i.swipeLeft = !1, i.pageNumber !== i.noBackSwipePage && i._swipeIn()) : i._bounceBack(),
+                this.isHorizontal = !1
+            },
+            !1),
+            i.cards = [];
+            var r = a.cards;
+            r && i.addCard(r);
+            for (var s = i._cardstates = [], l = i.showMaxCount, c = 0; l > c; c++) s[c] = {
+                x: c * i.offsetScale * i.cardWidth * .5,
+                y: -c * i.offsetScale * i.cardHeight + i.offsetY * (l - 1 - c),
+                scaleX: 1 - c * i.offsetScale,
+                scaleY: 1 - c * i.offsetScale
+            };
+            i.showIndex >= 0 && i.cards.length > 0 && i.showCardAt(i.showIndex)
+        },
+        addCard: function(e) {
+            e = e instanceof Array ? e: [e];
+            for (var t = this,
+            a = 0,
+            i = e.length; i > a; a++) {
+                var o = e[a];
+                t.cards.push(o),
+                t._setCardTransition(o)
+            }
+        },
+        beforeAddCard: function(e) {
+            e = e instanceof Array ? e: [e];
+            for (var t = this,
+            a = e.length - 1,
+            i = a; i >= 0; i--) {
+                var o = e[i];
+                t.cards.splice(0, 0, o),
+                t._setCardTransition(o)
+            }
+        },
+        disableSwipe: function() {
+            this.container.style.pointerEvents = "none"
+        },
+        enableSwipe: function() {
+            this.container.style.pointerEvents = "auto"
+        },
+        removeCard: function(e) {
+            for (var t = this,
+            a = t.cards,
+            i = 0; i < a.length; i++) {
+                var o = a[i];
+                if (o === e) return a.splice(i, 1),
+                void(o.parentNode && o.parentNode.removeChild(o))
+            }
+        },
+        removeAllCards: function() {
+            var e = this;
+            e.showIndex = -1,
+            e.cards.length = 0,
+            e.container.innerHTML = ""
+        },
+        showCardAt: function(e, t, o) {
+            var r, s = this,
+            l = s.cards,
+            c = l.length,
+            d = s.container,
+            p = Math.min(s.showMaxCount, c),
+            u = 0,
+            g = [];
+            for (e = e >= c ? 0 : e, s.showIndex = e, s.showCount = p; p > u;) r = l[e],
+            r.style.zIndex = p - u,
+            r.style.opacity = 1 - .3 * u,
+            r.parentNode || d.appendChild(r),
+            r.offsetWidth,
+            r.style.webkitTransition = t ? "-webkit-transform " + s.transitionDuration + "ms ease-out": "",
+            a(r, s._cardstates[u]),
+            i(r, !1),
+            g[u] = r,
+            e = e + 1 >= c ? 0 : e + 1,
+            u++;
+            for (d.offsetWidth, u = d.childNodes.length - p; --u >= 0;) {
+                var h = d.childNodes[u]; - 1 === g.indexOf(h) && h !== s._swipeOutCard && d.removeChild(h)
+            }
+            o || n(s.container, s, "cardChange", {
+                cardIndex: e,
+                swipeLeft: s.swipeLeft,
+                touchCard: s._swipeOutCard
+            })
+        },
+        _setCardTransition: function(e) {
+            var t = this;
+            e.style.webkitTransformOrigin = "0 100% 0",
+            e.addEventListener("webkitTransitionEnd",
+            function(e) {
+                var a = e.target,
+                i = a.parentNode;
+                a.style.webkitTransition = "";
+                var o = a.style.zIndex;
+                i && "SECTION" !== a.tagName && (a === t._swipeOutCard || 1 > o || o > t.showCount) && i.removeChild(a)
+            })
+        },
+        _moveCard: function(e, t) {
+            for (var o, n, r = this,
+            s = r.cards,
+            l = s.length,
+            c = r.showCount,
+            d = r.showIndex,
+            p = 0; c > p;) {
+                o = s[d],
+                n = r._cardstates[p],
+                o.style.webkitTransition = t ? "-webkit-transform " + r.transitionDuration + "ms ease-out": "";
+                var u = (c - p) * (c - 1 - p) * Math.min(.01 * e, 20);
+                a(o, {
+                    x: -(n.x + Math.max(0, (c - p) * (c - 1 - p) * Math.min(.01 * e, 20))),
+                    y: n.y,
+                    scaleX: n.scaleX,
+                    scaleY: n.scaleY,
+                    rotation: u
+                }),
+                i(o, !0),
+                p == c - 1 && (r._lastRotation = u),
+                d = d + 1 >= l ? 0 : d + 1,
+                p++
+            }
+        },
+        _bounceBack: function() {
+            for (var e, t, o = this,
+            n = o.cards,
+            r = n.length,
+            s = o.showCount,
+            l = o.showIndex,
+            c = 0; s > c;) e = n[l],
+            t = o._cardstates[c],
+            e.style.webkitTransition = "-webkit-transform " + o.transitionDuration + "ms ease-out",
+            a(e, {
+                x: t.x,
+                y: t.y,
+                scaleX: t.scaleX,
+                scaleY: t.scaleY
+            }),
+            i(e, !1),
+            l = l + 1 >= r ? 0 : l + 1,
+            c++
+        },
+        _swipeOut: function() {
+            var e, t, i = this,
+            o = i.cards,
+            n = (o.length, i.showCount),
+            r = i.showIndex;
+            e = i._swipeOutCard = o[r],
+            t = i._cardstates[0],
+            e.style.zIndex = n + 1,
+            e.style.webkitTransition = "-webkit-transform " + i.transitionDuration + "ms ease-out",
+            a(e, {
+                x: -s,
+                y: t.y,
+                rotation: i._lastRotation || 0
+            }),
+            i.showCardAt(r + 1, !0)
+        },
+        _swipeIn: function() {
+            var e, t, i = this,
+            o = i.cards,
+            r = o.length,
+            l = (i.showCount, i.showIndex);
+            return i._swipeOutCard = null,
+            0 === l ? void n(i.container, i, "loadLeftData", {
+                cardIndex: l,
+                swipeLeft: i.swipeLeft,
+                touchCard: i._swipeOutCard
+            }) : (l = l > 0 ? l - 1 : r - 1, e = o[l], t = i._cardstates[0], a(e, {
+                x: -s,
+                y: t.y,
+                rotation: i._lastRotation || 10
+            }), void i.showCardAt(l, !0))
+        },
+        _onTouchStart: function(t) {
+            var a = this,
+            i = e(t);
+            a.startX = i.x,
+            a.startY = i.y,
+            a.touchEnd = !1
+        },
+        _onTouchMove: function(t) {
+            var a = this,
+            i = e(t),
+            o = i.x - a.startX,
+            n = i.y - a.startY,
+            r = Math.abs(o) > Math.abs(n);
+            r && (this.isHorizontal = !0),
+            r && 0 > o && a._moveCard(o),
+            this.isHorizontal && t.preventDefault()
+        },
+        _onTouchEnd: function(t) {
+            var a = this,
+            i = e(t),
+            o = i.x - a.startX,
+            n = i.y - a.startY,
+            r = Math.abs(o) > Math.abs(n);
+            r && o <= -a.swipeInDistance ? (a.swipeLeft = !0, a._swipeOut()) : r && o >= a.swipeOutDistance ? (a.swipeLeft = !1, a.pageNumber !== a.noBackSwipePage && a._swipeIn()) : a._bounceBack(),
+            this.isHorizontal = !1
+        },
+        updatePageIndex: function(e) {
+            this.pageNumber = e
+        },
+        addEventListener: function(e, t, a) {
+            this.container.addEventListener(e, t, a)
+        },
+        removeEventListener: function(e, t, a) {
+            this.container.removeEventListener(e, t, a)
+        }
+    }
+} (),
+function(e, t) {
+    function a(e, t) {
+        var a, i, o, n = null,
+        r = 0,
+        s = function() {
+            r = Date.now(),
+            n = null,
+            o = e.apply(a, i)
+        };
+        return function() {
+            var l = Date.now(),
+            c = t - (l - r);
+            return a = this,
+            i = arguments,
+            0 >= c ? (clearTimeout(n), n = null, r = l, o = e.apply(a, i)) : n || (n = setTimeout(s, c)),
+            o
+        }
+    }
+    function i(e) {
+        var t = null != navigator.userAgent.match(/WindVane/i);
+        t && window.WindVane ? WindVane.call("TBDeviceInfo", "getInfo", {},
+        function(t) {
+            t && t.network && (M = t.network, e && e())
+        },
+        function(t) {
+            e && e()
+        }) : e && e()
+    }
+    function o(e) {
+        try {
+            var t = new Image;
+            t.src = "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAACyAgCdASoCAAIALmk0mk0iIiIiIgBoSygABc6WWgAA/veff/0PP8bA//LwYAAA",
+            t.onload = function() {
+                N = 2 === t.height ? !0 : !1,
+                e && e()
+            },
+            t.onerror = function() {
+                N = !1,
+                e && e()
+            }
+        } catch(a) {
+            e && e()
+        }
+    }
+    function n(e, t) {
+        for (var a in t) t.hasOwnProperty(a) && (e[a] = t[a]);
+        return e
+    }
+    function r(e, t) {
+        if (e) {
+            if (t || (t = {
+                x: 0,
+                y: 0
+            }), e != window) var a = e.getBoundingClientRect(),
+            i = a.left,
+            o = a.top,
+            n = a.right,
+            r = a.bottom;
+            else i = 0,
+            o = 0,
+            n = i + e.innerWidth,
+            r = o + e.innerHeight;
+            return {
+                left: i,
+                top: o,
+                right: n + t.x,
+                bottom: r + t.y
+            }
+        }
+    }
+    function s(e, t) {
+        var a = t.right > e.left && t.left < e.right,
+        i = t.bottom > e.top && t.top < e.bottom;
+        return a && i
+    }
+    function l() {
+        var e = document.createElement("canvas");
+        e.getContext("2d");
+        E = Array.prototype.slice.call(document.querySelectorAll("." + L["class"])),
+        E.length && E.forEach(function(e, t) {
+            "1" == e.getAttribute("data-cache") && p(e)
+        })
+    }
+    function c() {
+        var e = L.dataSrc;
+        E.length && E.forEach(function(t, a) {
+            if ("true" != t.getAttribute("data-src-checked")) {
+                var i = t.getAttribute(e),
+                o = t.getAttribute("data-size"),
+                n = t.getAttribute("data-type"),
+                r = {};
+                o && (r.size = o),
+                n && (r.type = n),
+                t.attributes["data-original"] && (r.isOriginal = !0),
+                i && (t.setAttribute(e, z.getNewUrl(i, r)), t.setAttribute("data-src-checked", "true"))
+            }
+        })
+    }
+    function d() {
+        var e = L.dataSrc,
+        t = r(window, {
+            x: L.lazyWidth,
+            y: L.lazyHeight
+        });
+        E.length && E.forEach(function(a, i) {
+            function o(t) {
+                if (t.removeAttribute(e), "IMG" === t.tagName) if (1 == t.getAttribute("data-cache")) {
+                    var a = u(n);
+                    t.setAttribute("src", a || n)
+                } else t.setAttribute("src", n);
+                else t.style.backgroundImage = "url(" + n + ")";
+                t.className = t.className.replace(new RegExp("(^|\\s)" + L["class"] + "(\\s|$)"), "")
+            }
+            var n = a.getAttribute(e),
+            l = r(a),
+            c = s(t, l);
+            n && ("wifi" == M && b && L.enalbeIOSWifiLoadMore ? o(a) : c && o(a))
+        })
+    }
+    function p(e) {
+        var t = !!window.localStorage && !!document.createElement("canvas").getContext;
+        if (t && "data" != e.src.substring(0, 4)) {
+            var a = document.createElement("canvas"),
+            i = a.getContext("2d");
+            e.setAttribute("crossOrigin", "anonymous"),
+            e.onload = function() {
+                if (!this.getAttribute(L.dataSrc) && "data" != e.src.substring(0, 4)) {
+                    var t = this.width,
+                    o = this.height;
+                    a.width = t,
+                    a.height = o,
+                    i.drawImage(this, 0, 0, t, o);
+                    var n = a.toDataURL(),
+                    r = {},
+                    s = this.src;
+                    r[this.src] = n;
+                    var l = localStorage.getItem(s),
+                    c = localStorage.getItem("h5_lib_img_cached_list"),
+                    d = c ? JSON.parse(c) : [];
+                    if (!l) {
+                        if (localStorage.setItem("h5_lib_img_cached_url_" + s, n), d.length >= 200) {
+                            var p = d.shift();
+                            localStorage.removeItem(p)
+                        }
+                        d.push("h5_lib_img_cached_url_" + s),
+                        localStorage.setItem("h5_lib_img_cached_list", JSON.stringify(d))
+                    }
+                }
+            }
+        }
+    }
+    function u(e) {
+        var t = !!window.localStorage,
+        a = localStorage.getItem("h5_lib_img_cached_url_" + e);
+        return t && a ? a: null
+    }
+    function g(e, t) {
+        t = t || C;
+        var a = k.square;
+        if (!e || "string" != typeof e && "number" != typeof e) throw new Error("wrong size type");
+        switch ("string" == typeof e && e.match(/^\d+x\d+$/) && (e = t == R ? e.split("x")[1] : e.split("x")[0]), t) {
+        case x:
+            a = k.widths;
+            break;
+        case R:
+            a = k.heights;
+            break;
+        case D:
+            a = k.xzs
+        }
+        var i = a[a.length - 1],
+        o = a[0],
+        n = 0,
+        r = L.baseDpr;
+        if (A || (e = parseInt(e / r)), e >= i) return i;
+        if (o >= e) return o;
+        for (var s = a.length; s >= 0; s--) if (a[s] <= e) {
+            a[s] == e ? n = e: s < a.length - 1 && (n = a[s + 1]);
+            break
+        }
+        return n
+    }
+    function h(e) {
+        var t = "",
+        a = "",
+        i = L.q,
+        o = L.sharpen,
+        n = L.defaultSize,
+        r = C;
+        switch ("[object Array]" == Object.prototype.toString.call(i) && (i = i[0]), e && (e.size && (n = e.size), e.type && e.type.match(new RegExp("^(" + [C, x, R, D].join("|") + ")$")) && (r = e.type)), t = g(n, r), r) {
+        case C:
+            t = t + "x" + t;
+            break;
+        case x:
+            t += "x10000";
+            break;
+        case R:
+            t = "10000x" + t;
+            break;
+        case D:
+            t = t + "x" + t + "xz"
+        }
+        return a = "_" + t,
+        a += i + o + ".jpg"
+    }
+    function m() {
+        var e = a(d, 100);
+        window.addEventListener("scroll", e, !1)
+    }
+    function f(e) {
+        function t() {
+            if ("[object Array]" == Object.prototype.toString.call(L.q)) if (A) L.q = M ? "wifi" == M ? L.q[0] : L.q[1] : L.q[0];
+            else {
+                var e = parseInt(L.q[0].slice(1)),
+                t = parseInt(L.q[1].slice(1)),
+                a = e + 40 >= 90 ? "q90": "q" + (e + 40),
+                i = t + 45 >= 75 ? "q75": "q" + (t + 45);
+                L.q = M ? "wifi" == M ? a: i: a
+            }
+            l(),
+            o(function() {
+                c(),
+                L.enableLazyload && (m(), d())
+            })
+        }
+        e = e || {},
+        L = n(L, e),
+        L["class"] = "." !== L["class"].charAt(0) ? L["class"] : L["class"].slice(1),
+        L.size && (L.defaultSize = g(L.size)),
+        i(t)
+    }
+    var v = (window.document, navigator.userAgent),
+    w = window.devicePixelRatio ? window.devicePixelRatio: 1,
+    b = null != v.match(/(iPhone\sOS)\s([\d_]+)/i),
+    y = v.match(/(iPad)/),
+    A = w >= 2;
+    y && (A = !0);
+    var I = "gw.alicdn.com",
+    T = "data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==",
+    S = /_(\d+x\d+|cy\d+i\d+|sum|m|b)?(xz|xc)?(q\d+)?(s\d+)?(\.jpg)?(_\.webp)?$/i,
+    C = "square",
+    x = "widthFixed",
+    R = "heightFixed",
+    D = "xz",
+    k = {};
+    k.widths = [110, 150, 170, 220, 240, 290, 450, 570, 580, 620, 790],
+    k.heights = [170, 220, 340, 500],
+    k.xzs = [72, 80, 88, 90, 100, 110, 120, 145, 160, 170, 180, 200, 230, 270, 290, 310, 360, 430, 460, 580, 640],
+    k.square = [16, 20, 24, 30, 32, 36, 40, 48, 50, 60, 64, 70, 72, 80, 88, 90, 100, 110, 120, 125, 128, 145, 180, 190, 200, 200, 210, 220, 230, 240, 250, 270, 300, 310, 315, 320, 336, 360, 468, 490, 540, 560, 580, 600, 640, 720, 728, 760, 970],
+    k.filterDomains = ["a.tbcdn.cn", "assets.alicdn.com"];
+    var M, E, N = !1,
+    L = {
+        "class": "lib-img",
+        size: "320x320",
+        sharpen: "s150",
+        dataSrc: "data-src",
+        q: ["q50", "q30"],
+        enableLazyload: !0,
+        lazyHeight: 0,
+        lazyWidth: 0,
+        enalbeIOSWifiLoadMore: !1,
+        baseDpr: 2
+    },
+    z = {
+        getNewUrl: function(e, a) {
+            if (!e || "string" != typeof e) return "";
+            var i = L.defaultSize + "x" + L.defaultSize,
+            o = L.q;
+            "[object Array]" == Object.prototype.toString.call(o) && (o = o[0]);
+            var n = "_" + i + o + L.sharpen + ".jpg";
+            try {
+                var r = new t.httpurl(e)
+            } catch(s) {
+                return console.log("[error]wrong img url:", e),
+                e
+            }
+            var l = r.host,
+            c = r.pathname;
+            r.protocol;
+            if ( - 1 != k.filterDomains.indexOf(l)) return r.toString();
+            var d = l.match(/(.+\.(?:alicdn|taobaocdn|taobao|mmcdn)\.com)/);
+            if (d && d[0] != I && (r.host = I), a && a.isOriginal) return r.toString();
+            var p = c.match(S),
+            u = c.match(/-(\d+)-(\d+)\.(?:jpg|png|gif)/);
+            if (u) {
+                var m, f;
+                m = parseInt(u[1]) < parseInt(L.defaultSize) ? L.defaultSize: u[1] > 760 ? 760 : u[1],
+                f = g(m),
+                n = "_" + f + "x" + f + o + L.sharpen + ".jpg"
+            }
+            return a && "string" == typeof a ? n = h({
+                size: a
+            }) : a && "object" == typeof a && Object.keys(a).length > 0 && (n = h(a)),
+            /\.png/.test(c) && (n = n.replace(/(q\d+)(s\d+)/, "")),
+            N && (n += "_.webp"),
+            p ? (p[1] || p[2] || p[3] || p[4]) && (r.pathname = c.replace(S, n)) : c.match(/_\.webp$/g) ? r.pathname = c.replace(/_\.webp$/g, n) : r.pathname = c + n,
+            r.toString()
+        },
+        fireLazyload: function() {
+            l(),
+            c(),
+            d()
+        }
+    };
+    t.img = function(e) {
+        return f.apply(z, arguments),
+        z
+    },
+    t.img.defaultSrc = T
+} (window, window.lib || (window.lib = {})),
+function(e, t) {
+    var a = e.document,
+    i = (e.navigator.userAgent, window.requestAnimationFrame || window.webkitRequestAnimationFrame);
+    proto = {
+        init: function() {
+            function e() {
+                if (l.scraping) for (var e = 0; e < event.changedTouches.length; e++) t(event.changedTouches[e])
+            }
+            function t(e) {
+                function t(t) {
+                    for (var a, i = 0; i < t.changedTouches.length; i++) if (t.changedTouches[i].identifier == e.identifier) {
+                        a = t.changedTouches[i];
+                        break
+                    }
+                    a && (d && u && s.moveTo(d, u), o(a) && (d = a.clientX - g.left, u = a.clientY - g.top, s.lineTo(d, u), s.stroke()), c.forceRefresh && (p.style.opacity ? p.style.opacity = "": p.style.opacity = .999))
+                }
+                function l(i) {
+                    h = !1;
+                    for (var o, s = 0; s < i.changedTouches.length; s++) if (i.changedTouches[s].identifier == e.identifier) {
+                        o = i.changedTouches[s];
+                        break
+                    }
+                    o && (n() > c.activePercent && r(), a.removeEventListener("touchmove", t, !1), a.removeEventListener("touchend", l, !1))
+                }
+                var d, u, h = !0;
+                a.addEventListener("touchmove", t, !1),
+                a.addEventListener("touchend", l, !1),
+                o(e) && (d = e.clientX - g.left, u = e.clientY - g.top),
+                s.beginPath(),
+                i && c.moveChecking && i(function() {
+                    h && (n() > c.activePercent ? (r(), a.removeEventListener("touchmove", t, !1), a.removeEventListener("touchend", l, !1)) : i(arguments.callee))
+                })
+            }
+            function o(e) {
+                return e.clientX > g.left && e.clientX < g.right && e.clientY > g.top && e.clientY < g.bottom
+            }
+            function n() {
+                var e, t, a, i, o, n = u.querySelectorAll(".active-el"),
+                r = 0,
+                l = 0;
+                0 === n.length && (n = u.querySelectorAll("*"));
+                for (var c = 0; c < n.length; c++) if (e = n[c].getClientRects()[0]) {
+                    t = e.left - g.left,
+                    a = e.top - g.top,
+                    i = e.right - e.left,
+                    o = e.bottom - e.top,
+                    data = s.getImageData(t, a, i, o).data;
+                    for (var d = 0; d < data.length; d += 4) r++,
+                    0 == data[d + 3] && l++
+                }
+                return l / r
+            }
+            function r() {
+                l.scraping = !1,
+                p.style.webkitTransition = "opacity 0.6s ease",
+                p.style.opacity = 0,
+                setTimeout(function() {
+                    p.style.display = "none",
+                    c.onfinish && c.onfinish()
+                },
+                600)
+            }
+            var s, l = this,
+            c = l.options,
+            d = l.el = "string" == typeof c.el ? document.querySelector(c.el) : c.el,
+            p = l.canvas = document.createElement("canvas"),
+            u = l.wrap = document.createElement("div"),
+            g = l.region = d.getClientRects()[0];
+            if (d.appendChild(u), d.appendChild(p), d.style.cssText += "position:relative;", p.width = g.right - g.left, p.height = g.bottom - g.top, u.style.cssText = "width:100%;height:100%;position:relative;", p.style.cssText = "width:" + p.width + "px;height:" + p.height + ";position:absolute;top:0;left:0;z-index:9;display:none;", !(s = l.context = p.getContext("2d"))) throw new Error("not support context 2d");
+            a.addEventListener("touchstart", e, !1)
+        },
+        replace: function(e) {
+            var t = this,
+            a = t.wrap;
+            t.canvas;
+            if (e instanceof HTMLElement && (e = [e]), a.style.visibility = "hidden", "string" == typeof e) a.innerHTML = e;
+            else if (e instanceof Array) {
+                a.innerHTML = "";
+                for (var i = 0; i < e.length; i++) a.appendChild(e[i])
+            }
+            a.style.visibility = ""
+        },
+        refresh: function(e) {
+            var t = this,
+            a = (t.el, t.wrap),
+            i = t.options,
+            o = t.canvas,
+            n = t.region,
+            r = t.context;
+            e || (e = {});
+            for (var s in e) i[s] = e[s];
+            if (a.style.visibility = "hidden", o.width = n.right - n.left, r.globalCompositeOperation = "source-over", r.fillStyle = i.coverColor, r.fillRect(0, 0, n.right - n.left, n.bottom - n.top), i.font) {
+                if (r.font = i.font.size + " " + (i.font.family || "serif"), r.fillStyle = i.font.color, "center" === i.font.x || "center" === i.font.y) {
+                    var l = r.measureText(i.font.text);
+                    "center" === i.font.x && (i.font.x = o.width / 2 - l.width / 2),
+                    "center" === i.font.y && (i.font.y = o.height / 2 - l.height / 2)
+                }
+                r.fillText(i.font.text, i.font.x || 0, i.font.y || 0)
+            }
+            i.img && r.drawImage(i.img, 0, 0, i.img.width, i.img.height, 0, 0, o.width, o.height),
+            r.globalCompositeOperation = "destination-out",
+            r.lineJoin = "round",
+            r.lineCap = "round",
+            r.strokeStyle = "rgba(0,0,0,255)",
+            r.lineWidth = i.lineWidth || 30,
+            o.style.opacity = i.opacity || 1,
+            o.style.webkitTransition = "",
+            o.style.display = "",
+            a.style.visibility = "",
+            this.scraping = !0
+        }
+    },
+    t.scrape = function(e) {
+        var t = Object.create({});
+        e.activePercent || (e.activePercent = .8),
+        t.options = e;
+        for (var a in proto) t[a] = proto[a];
+        return t.init(),
+        t
+    }
+} (window, window.lib || (window.lib = {})),
+!
+function() {
+    function e(e) {
+        return e.replace(b, "").replace(y, ",").replace(A, "").replace(I, "").replace(T, "").split(S)
+    }
+    function t(e) {
+        return "'" + e.replace(/('|\\)/g, "\\$1").replace(/\r/g, "\\r").replace(/\n/g, "\\n") + "'"
+    }
+    function a(a, i) {
+        function o(e) {
+            return u += e.split(/\n/).length - 1,
+            d && (e = e.replace(/\s+/g, " ").replace(/<!--[\w\W]*?-->/g, "")),
+            e && (e = w[1] + t(e) + w[2] + "\n"),
+            e
+        }
+        function n(t) {
+            var a = u;
+            if (c ? t = c(t, i) : r && (t = t.replace(/\n/g,
+            function() {
+                return u++,
+                "$line=" + u + ";"
+            })), 0 === t.indexOf("=")) {
+                var o = p && !/^=[=#]/.test(t);
+                if (t = t.replace(/^=[=#]?|[\s;]*$/g, ""), o) {
+                    var n = t.replace(/\s*\([^\)]+\)/, "");
+                    g[n] || /^(include|print)$/.test(n) || (t = "$escape(" + t + ")")
+                } else t = "$string(" + t + ")";
+                t = w[1] + t + w[2]
+            }
+            return r && (t = "$line=" + a + ";" + t),
+            v(e(t),
+            function(e) {
+                if (e && !m[e]) {
+                    var t;
+                    t = "print" === e ? y: "include" === e ? A: g[e] ? "$utils." + e: h[e] ? "$helpers." + e: "$data." + e,
+                    I += e + "=" + t + ",",
+                    m[e] = !0
+                }
+            }),
+            t + "\n"
+        }
+        var r = i.debug,
+        s = i.openTag,
+        l = i.closeTag,
+        c = i.parser,
+        d = i.compress,
+        p = i.escape,
+        u = 1,
+        m = {
+            $data: 1,
+            $filename: 1,
+            $utils: 1,
+            $helpers: 1,
+            $out: 1,
+            $line: 1
+        },
+        f = "".trim,
+        w = f ? ["$out='';", "$out+=", ";", "$out"] : ["$out=[];", "$out.push(", ");", "$out.join('')"],
+        b = f ? "$out+=text;return $out;": "$out.push(text);",
+        y = "function(){var text=''.concat.apply('',arguments);" + b + "}",
+        A = "function(filename,data){data=data||$data;var text=$utils.$include(filename,data,$filename);" + b + "}",
+        I = "'use strict';var $utils=this,$helpers=$utils.$helpers," + (r ? "$line=0,": ""),
+        T = w[0],
+        S = "return new String(" + w[3] + ");";
+        v(a.split(s),
+        function(e) {
+            e = e.split(l);
+            var t = e[0],
+            a = e[1];
+            1 === e.length ? T += o(t) : (T += n(t), a && (T += o(a)))
+        });
+        var C = I + T + S;
+        r && (C = "try{" + C + "}catch(e){throw {filename:$filename,name:'Render Error',message:e.message,line:$line,source:" + t(a) + ".split(/\\n/)[$line-1].replace(/^\\s+/,'')};}");
+        try {
+            var x = new Function("$data", "$filename", C);
+            return x.prototype = g,
+            x
+        } catch(R) {
+            throw R.temp = "function anonymous($data,$filename) {" + C + "}",
+            R
+        }
+    }
+    var i = function(e, t) {
+        return "string" == typeof t ? f(t, {
+            filename: e
+        }) : r(e, t)
+    };
+    i.version = "3.0.0",
+    i.config = function(e, t) {
+        o[e] = t
+    };
+    var o = i.defaults = {
+        openTag: "<%",
+        closeTag: "%>",
+        escape: !0,
+        cache: !0,
+        compress: !1,
+        parser: null
+    },
+    n = i.cache = {};
+    i.render = function(e, t) {
+        return f(e, t)
+    };
+    var r = i.renderFile = function(e, t) {
+        var a = i.get(e) || m({
+            filename: e,
+            name: "Render Error",
+            message: "Template not found"
+        });
+        return t ? a(t) : a
+    };
+    i.get = function(e) {
+        var t;
+        if (n[e]) t = n[e];
+        else if ("object" == typeof document) {
+            var a = document.getElementById(e);
+            if (a) {
+                var i = (a.value || a.innerHTML).replace(/^\s*|\s*$/g, "");
+                t = f(i, {
+                    filename: e
+                })
+            }
+        }
+        return t
+    };
+    var s = function(e, t) {
+        return "string" != typeof e && (t = typeof e, "number" === t ? e += "": e = "function" === t ? s(e.call(e)) : ""),
+        e
+    },
+    l = {
+        "<": "&#60;",
+        ">": "&#62;",
+        '"': "&#34;",
+        "'": "&#39;",
+        "&": "&#38;"
+    },
+    c = function(e) {
+        return l[e]
+    },
+    d = function(e) {
+        return s(e).replace(/&(?![\w#]+;)|[<>"']/g, c)
+    },
+    p = Array.isArray ||
+    function(e) {
+        return "[object Array]" === {}.toString.call(e)
+    },
+    u = function(e, t) {
+        var a, i;
+        if (p(e)) for (a = 0, i = e.length; i > a; a++) t.call(e, e[a], a, e);
+        else for (a in e) t.call(e, e[a], a)
+    },
+    g = i.utils = {
+        $helpers: {},
+        $include: r,
+        $string: s,
+        $escape: d,
+        $each: u
+    };
+    i.helper = function(e, t) {
+        h[e] = t
+    };
+    var h = i.helpers = g.$helpers;
+    i.onerror = function(e) {
+        var t = "Template Error\n\n";
+        for (var a in e) t += "<" + a + ">\n" + e[a] + "\n\n";
+        "object" == typeof console && console.error(t)
+    };
+    var m = function(e) {
+        return i.onerror(e),
+        function() {
+            return "{Template Error}"
+        }
+    },
+    f = i.compile = function(e, t) {
+        function i(a) {
+            try {
+                return new l(a, s) + ""
+            } catch(i) {
+                return t.debug ? m(i)() : (t.debug = !0, f(e, t)(a))
+            }
+        }
+        t = t || {};
+        for (var r in o) void 0 === t[r] && (t[r] = o[r]);
+        var s = t.filename;
+        try {
+            var l = a(e, t)
+        } catch(c) {
+            return c.filename = s || "anonymous",
+            c.name = "Syntax Error",
+            m(c)
+        }
+        return i.prototype = l.prototype,
+        i.toString = function() {
+            return l.toString()
+        },
+        s && t.cache && (n[s] = i),
+        i
+    },
+    v = g.$each,
+    w = "break,case,catch,continue,debugger,default,delete,do,else,false,finally,for,function,if,in,instanceof,new,null,return,switch,this,throw,true,try,typeof,var,void,while,with,abstract,boolean,byte,char,class,const,double,enum,export,extends,final,float,goto,implements,import,int,interface,long,native,package,private,protected,public,short,static,super,synchronized,throws,transient,volatile,arguments,let,yield,undefined",
+    b = /\/\*[\w\W]*?\*\/|\/\/[^\n]*\n|\/\/[^\n]*$|"(?:[^"\\]|\\[\w\W])*"|'(?:[^'\\]|\\[\w\W])*'|\s*\.\s*[$\w\.]+/g,
+    y = /[^\w$]+/g,
+    A = new RegExp(["\\b" + w.replace(/,/g, "\\b|\\b") + "\\b"].join("|"), "g"),
+    I = /^\d[^,]*|,\d[^,]*/g,
+    T = /^,+|,+$/g,
+    S = /^$|,+/;
+    o.openTag = "{{",
+    o.closeTag = "}}";
+    var C = function(e, t) {
+        var a = t.split(":"),
+        i = a.shift(),
+        o = a.join(":") || "";
+        return o && (o = ", " + o),
+        "$helpers." + i + "(" + e + o + ")"
+    };
+    o.parser = function(e) {
+        e = e.replace(/^\s/, "");
+        var t = e.split(" "),
+        a = t.shift(),
+        o = t.join(" ");
+        switch (a) {
+        case "if":
+            e = "if(" + o + "){";
+            break;
+        case "else":
+            t = "if" === t.shift() ? " if(" + t.join(" ") + ")": "",
+            e = "}else" + t + "{";
+            break;
+        case "/if":
+            e = "}";
+            break;
+        case "each":
+            var n = t[0] || "$data",
+            r = t[1] || "as",
+            s = t[2] || "$value",
+            l = t[3] || "$index",
+            c = s + "," + l;
+            "as" !== r && (n = "[]"),
+            e = "$each(" + n + ",function(" + c + "){";
+            break;
+        case "/each":
+            e = "});";
+            break;
+        case "echo":
+            e = "print(" + o + ");";
+            break;
+        case "print":
+        case "include":
+            e = a + "(" + t.join(",") + ");";
+            break;
+        default:
+            if (/^\s*\|\s*[\w\$]/.test(o)) {
+                var d = !0;
+                0 === e.indexOf("#") && (e = e.substr(1), d = !1);
+                for (var p = 0,
+                u = e.split("|"), g = u.length, h = u[p++]; g > p; p++) h = C(h, u[p]);
+                e = (d ? "=": "=#") + h
+            } else e = i.helpers[a] ? "=#" + a + "(" + t.join(",") + ");": "=" + e
+        }
+        return e
+    },
+    "function" == typeof define ? define(function() {
+        return i
+    }) : "undefined" != typeof exports ? module.exports = i: this.template = i
+} (),
+function(e, t) {
+    var a = {
+        logToShop: function(e, t, i, o) {
+            t = t || 0,
+            a.goldlogger("goodshop.1.2", "pageType=" + e + "&id=" + t + "&userid=" + i + "&shopid=" + o, "H46807196")
+        },
+        logToDetail: function(e, t, i, o, n) {
+            t = t || 0,
+            a.goldlogger("goodshop.1.3", "pageType=" + e + "&id=" + t + "&userid=" + i + "&shopid=" + o + "&itemid=" + n, "H46807197")
+        },
+        logClickSimilarBtn: function(e, t, i, o) {
+            t = t || 0,
+            a.goldlogger("goodshop.1.4", "pageType=" + e + "&id=" + t + "&userid=" + i + "&shopid=" + o, "H46807198")
+        },
+        logClickgoodShopTopic: function() {
+            a.goldlogger("goodshop.2.1", "pageType=1", "H46807174")
+        },
+        logClickSimilarName: function(e, t) {
+            t = t || 0,
+            a.goldlogger("goodshop.1.5", "pageType=" + e + "&id=" + t, "H46807199")
+        },
+        logClickTabGoodShop: function() {
+            a.goldlogger("goodshop.1.1", "", "H46807174")
+        },
+        logClickTabTopic: function() {
+            a.goldlogger("goodshop.1.6", "", "H46807200")
+        },
+        logClickToRecommendBtn: function() {
+            a.goldlogger("goodshop.2.32", "", "H46836987")
+        },
+        logClickToDaren: function() {
+            a.goldlogger("goodshop.2.31", "", "H46836965")
+        },
+        logLeftSlide: function(e, t, i, o, n) {
+            t = t || 0,
+            setTimeout(function() {
+                a.goldlogger("goodshop.1.13", "pageType=" + e + "&id=" + t + "&userid=" + i + "&shopid=" + o + "&itemids=" + n, "H46836988")
+            },
+            10)
+        },
+        logRightSlide: function(e, t, i, o, n) {
+            t = t || 0,
+            setTimeout(function() {
+                a.goldlogger("goodshop.1.14", "pageType=" + e + "&id=" + t + "&userid=" + i + "&shopid=" + o + "&itemids=" + n, "H46836989")
+            },
+            10)
+        },
+        openCategory: function() {
+            a.goldlogger("goodshop.1.7", "", "H46807201")
+        },
+        categoryItem: function(e) {
+            a.goldlogger("goodshop.1.16", "categoryId=" + e, "H46836991")
+        },
+        lastCardExpose: function() {
+            a.goldlogger("goodshop.1.8", "", "H46807202")
+        },
+        clickLastCardToRecommendTopic: function() {
+            a.goldlogger("goodshop.1.9", "", "H46807203")
+        },
+        cardExpose: function(e, t, i, o) {
+            a.goldlogger("goodshop.1.15", "pageType=" + e + "&id=" + t + "&userid=" + i + "&shopid=" + o, "H46836990")
+        },
+        goldlogger: function(e, t, a) { !
+            function() {
+                window.goldlog ? goldlog.record("/" + e, "", t, a) : setTimeout(arguments.callee, 200)
+            } ()
+        }
+    };
+    t.logger = a
+} (window, window.app || (window.app = {})),
+function(e, t, a) {
+    "use strict";
+    var i = t.promise,
+    o = {
+        categorylist: [],
+        subCategoryJSON: {},
+        getHomeShopData: function(e, t, a) {
+            var i = {
+                api: "mtop.polaris.shop.getGoodShopRecommend",
+                v: "2.0",
+                data: e
+            };
+            o._fetchData(i, t, a)
+        },
+        getSimilarShopData: function(e, t, a) {
+            var i = {
+                api: "mtop.polaris.shop.getSimilarShopRecommend",
+                data: e
+            };
+            o._fetchData(i, t, a)
+        },
+        getCategoryData: function(e, t, a) {
+            var i = {
+                api: "mtop.polaris.shop.getCategoryShopRecommend",
+                v: "2.0",
+                data: e
+            };
+            o._fetchData(i, t, a)
+        },
+        getTopicData: function(e, t, a) {
+            var i = {
+                api: "mtop.polaris.shop.getSubjectShopRecommend",
+                data: e
+            };
+            o._fetchData(i, t, a)
+        },
+        geHomeTopicsData: function(e, t, a) {
+            var i = {
+                api: "mtop.polaris.shop.getSubjectCategoryPortal",
+                v: "2.0",
+                data: e
+            };
+            o._fetchData(i, t, a)
+        },
+        updatePosition: function(e, t, a) {
+            var i = {
+                api: "mtop.polaris.shop.userreadnumrecord",
+                data: {
+                    positon: e
+                }
+            };
+            o._fetchData(i, t, a)
+        },
+        _fetchData: function(e, a, o) {
+            var n = i.resolve(t.mtop.request({
+                api: e.api,
+                v: e.v || "1.0",
+                data: e.data
+            }));
+            n.then(function(e) {
+                e.ret && "SUCCESS::调用成功" === e.ret[0] ? a && a(e.data) : o && o()
+            })
+        }
+    };
+    a.model = o
+} (window, window.lib || (window.lib = {}), window.app || (window.app = {})),
+function(e, t, a) {
+    function i(e) {
+        var a = t.mtop.config.subDomain,
+        i = new t.httpurl(e);
+        return i.host = i.host.replace(/(^|\.)(waptest|wapa|m)(\.|$)/i,
+        function(e, t, i, o) {
+            return t + a + o
+        }),
+        i.toString()
+    }
+    var o = !1;
+    if (t.env.aliapp) {
+        var n = t.version(t.env.aliapp.version);
+        n.gte("5.2.7.12") && (o = !0)
+    }
+    a.url = {
+        topic: function(e) {
+            return i(e)
+        } ("//h5.m.taobao.com/findgoodshop/topic.html")
+    },
+    "undefined" != typeof module && module.exports && (module.exports = a.url)
+} (window, window.lib || (window.lib = {}), window.app || (window.app = {})),
+function(e, t, a) {
+    "use strict";
+    a.goodShopUtil = {
+        noResultHandler: function() {
+            $("#good-shop-box").remove(),
+            $("#category-box").remove(),
+            $(".nav").remove(),
+            $(".loading").remove();
+            var e = {
+                type: "nodata",
+                title: "数据加载不成功",
+                text: ["好店忙碌，请重新加载"]
+            },
+            t = new ctrl.error(e);
+            document.body.appendChild(t.root)
+        },
+        isNewVersion: function() {
+            var e = !1;
+            if (t.env.aliapp) {
+                var a = t.version(t.env.aliapp.version);
+                a.gte("5.3.2") && (e = !0)
+            }
+            return e
+        }
+    }
+} (window, window.lib || (window.lib = {}), window.app || (window.app = {})),
+function(e, t, a) {
+    "use strict";
+    function i() {
+        var e = new t.img({
+            size: "640",
+            sharpen: "s120",
+            q: ["q75", "q50"]
+        });
+        return e.getNewUrl("//gw.alicdn.com/tfscom/TB1iGVeIVXXXXaLaXXXLIffVVXX-640-1136.png")
+    }
+    if (t.env.os.isIOS && window.innerHeight > 960 && document.addEventListener("touchmove",
+    function(e) {
+        e.preventDefault()
+    },
+    !1), !localStorage.getItem("goodshop-viewed")) {
+        localStorage.setItem("goodshop-viewed", 100),
+        $('<div id="mask-card" style="position:absolute;top:0;z-index:1000;left:0;right:0;bottom:0;background-color:rgba(0,0,0,0.8);background-repeat:no-repeat;background-position:center;background-size:contain;background-image:url(' + i() + ')"></div>').appendTo(document.body);
+        var o = $("#mask-card"),
+        n = function() {
+            o.animate({
+                scale: "0,0"
+            },
+            600, "ease-in 0.2s",
+            function() {
+                o.remove()
+            })
+        };
+        o.bind("click", n),
+        setTimeout(n, 5e3)
+    }
+} (window, window.lib || (window.lib = {}), window.app || (window.app = {})),
+function(e, t, a) {
+    "use strict";
+    var i = e.$,
+    o = "iVBORw0KGgoAAAANSUhEUgAAAHgAAAAfCAYAAAAslQkwAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyhpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNS1jMDIxIDc5LjE1NTc3MiwgMjAxNC8wMS8xMy0xOTo0NDowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTQgKE1hY2ludG9zaCkiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6NTAyNTJCMDQzODAwMTFFNUFDQUFFMDA1MENDQjlCREMiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6NTAyNTJCMDUzODAwMTFFNUFDQUFFMDA1MENDQjlCREMiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDpCMDYwRjJGRjM3RkYxMUU1QUNBQUUwMDUwQ0NCOUJEQyIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDpCMDYwRjMwMDM3RkYxMUU1QUNBQUUwMDUwQ0NCOUJEQyIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PmrwFwgAAAZ4SURBVHja7Ft7bBZFEN+Dr6V8kCAiRANqiSEiCNXGB+EfU+ODp4ZgTv5QIoQ/SBVF46MxIkSKYETURKIhVkDxdYmKwUdJaEJVHioBNVirCbG+ItiqtdhSoO35m7v97HW7e++7ry1MMtt2dm8fM7uzM7NTzTRNJgVdG4SyUKB2McM8xc5Cv4GMS10FcI1AewG47CzbUgRdy6J8RVKzHoftQDgB6xrRywVqO3DtAGHaEpRLHJR9YNb9jvpalEMc9eWoP5in2ZIWvV1Cfwt4IOwJfhw4VqDtB07F4qfEMOkaMKyDM/M6lDMTZtJjjvHuQjkHeK2jfhin52C6wJtZqL8o4hwOYg4/8zkU8jH8wHAF/XL00+z1sdbrDta121AaVJcgw0disc18vIoUNMNQjNfOxzPzdBIXYQ5b+BzOR/l7unewrpFAHwGuTli4Zyo05M/I0rUylCuAZZI2/3DD6niM47b6aLMXuBHYFqDf8cANHm2eB04TVPRPwO2Ov+8BDnb8/RSw3uccBnGNNKbHfWmYuz2+awJeHb+Ade0r/CxR1BNzZ2Nye1LeeKcsw8Iwfw1oPF3h2cYwl6PdKkHA9Ra9u5+lgoCrfQgo922lINy/gPf5+LITYzQo+pyIslhyp//h5wSXuNSTif4ZBohDaH8CXwc+iol5neAvAgu3b1jnC6z19YRlfgThAUslm2SeoHUC+8FxwyjgvcAWfh247+b+JVhSy09w4eZOg2mt1zDfyHegg6zmo3yC1wv11cDaEP2OpmUDx0nN+4EViBjFvQ4n70zr1BnmpnxPL4NJvMMnKjOialG/LuTCK7gjPlV0zQaYdTxBcjCMFIRrgMddHm2OZgIKTeOWbdahSrdjMTskxsxptN8lEfCZAO0pjFHgo01RMAEbpslVku6gLgZtOur2Sb5oGUCqmFywEYoTLMK5EoueHmq+iXFGHwCPeLRpCWNkbRMETLCQUTy3N5zso+IK+iJ2Gvgs8Faf7edyFHlRFOMaqrBhErGiPwSSr3eh4C/HCRTzrg7Q/ggWe3eA9v9KghNu6q81hU3XkZQVHfBqN7t8uDlRYSTw5gDtvw7YvyjgIQ5VXCAROG3gF7lXIQKp7ocFGj3MbHURYFFa2i7jMehqHvUJCvR6s74P36hqAcv50Ib17FTczdMkAv4e7V9yGT8roWkukbjR0o3lHbmr8xJwJqQajxpA+Ry4IME71U3AQ6UCjheGKTTBoQB9bPDRZnxGMCREIKvvuxALqIvsZqjissmc4KKUBZxNL9Dhbki8GTrQITde+goc7+XqkPtnmBQvv0yo+/v/t+RkT7AK1vL7v9GlzdPMfgGLQZXaRgi5RMMdxgOljzzJDTAnFPZRAX/LT3FuDfRyNAv4Guv5ykRQm8D4fk/wL9ye6fKQSWd8J4wiVLbavpTjZGYnCdzYb4IWdmZojUC9heeiLRLouxKYgd8TfMhTuBFV6DkK+hYJ7Q7Wv+AZRtGlbpjBreGLHTRKBNicgoDrFCq2K+pAGY/OrlGcgBrs9vms58N2a0ybKgpcFeAUf4o1PIffHuAUUtdimjC95bYlMM+Jwt9VwD1S1ylGAcsepcvAhI3WiTXMLwUGveujf1mCW0GCAp6noKtOwjGXvjqYv0eDMEKYK3gvdPePjbDucX4EfFjRptxCPbZXPj8dFWG84oAnl3KHb5LUtfb6bwz7gZ7sBmf2xW5mx9lXMjsMS7zZYWVpuMd8ZVqj08UgojTh4h5WsmE2gh5OwLpGbt0NitoTTgG/zOzUkMkJ331+0lbJkv0xpvHqHczIciOKktwv4VRyjR4CkzfzNm+jXMXsFBkKgLwH2sf4uQ5tPnH0RRuVcpsXS8ZsVghjitVfN1CItdJl7hP4u7q6njG6KkcofPfGjEPltqOzUvx2J3ASoyevaHcACfJK5p7zlTR0cGHloJILl4CeMimdZgXW3uTgA7lPD4IXr3IflGLiMy3UNbJJKE6+iQdExijG3augz+ffE1Cy4xzulahgEgufM76GLPCMxH2oio29dhy7xENF/8bs0GRcQOqXUn1/sAIEhnlYUJ0f8TvvfdSdcDHCKIo3G2u4gHsIC7m/nBUsbVE1UwzazT45ya+C5Xwz5YCyL7dGXDttlgZm/+fIfovZyv8ujE/AKwXqTgw+Iy/nWdcGY+zOCN/T5jkPWCrZVC3MTr9tcvm+1NrQhnksrSX/J8AApbK+esFbMlMAAAAASUVORK5CYII=",
+    n = "iVBORw0KGgoAAAANSUhEUgAAAD0AAAAZCAYAAACCXybJAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2tpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNS1jMDE0IDc5LjE1MTQ4MSwgMjAxMy8wMy8xMy0xMjowOToxNSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo0MkE5RUY2QjE4MjA2ODExODIyQUNERDVFOThDQ0NERiIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDo0NTA5N0Y3RDM0MUYxMUU1OEMyMUZDNTgxNDlCRjg2QiIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDo0NTA5N0Y3QzM0MUYxMUU1OEMyMUZDNTgxNDlCRjg2QiIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ0MgKE1hY2ludG9zaCkiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDpjNTkzMGVlOS04YzIzLTRmZWYtOTJlMS0xMmVkZDJhMmI5MGYiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6NDJBOUVGNkIxODIwNjgxMTgyMkFDREQ1RTk4Q0NDREYiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz6AZvpDAAAC9ElEQVR42uRYPY/TQBBNoogOJNeIghiJhs7XIETnFAhBF0robCEhxNEkNc0loqEk6dJQxBW1jcR1ICU/IS6uQUK6s2hoQArPd2/FYPyx/uByESO9zdq76+zbmZ2Z3fZms2n9b9LePLZ0+9qAD8wAN9FmEGHpGcyX5066k3juASeAkzPGS3k3BuLZDzT+0+AC2qVn+2TPJqw6pLuJ51hTE2AKWCkaTZMhF2kErDT6W7QYRaTKvAOg3xTpFklHJG6QeJQx3qGWXZp9GZllWE2R+JqLW4q0mlBELWZJj+17JScRCKsKSu/pM8uImiDtp7SF1IQjSLa4by2xOOOUsSua+4WUbk5bKBzPUKzugO8muxqyFOl+jqf1STjetwvgET2vQ+L9XSWd5WUXJGwKk24JTz0leVfsVV0Zn6Ka907u82OU1+Afvhf0u4LyqJuh3SHh5Xhvj0QXtAaPi6GboNTx3kn5DHwAbmuMPewmNDsQjmuUsW97oh7RvIfU3IDjZhoeto73TspD4CvaXuB7bzLGPUd5A7jTEft2KbRrphCOzbmdEY8nDF2hIH9+Ml/+RHkPOAC56ymEr3Je9+O+HWrEIxkzx5ytghR1ReJVEpUmiMcm/hb4mNJ6GPdAn0/SkelM0qJV5DmsqATh3mkUaMKR/Sa+j+89AKaou9Tya5SX8PxUeu+x8MxBwSmrVWC6hviWV7AATsHBpqrcBdYg+w6/34BnwK28kGVrkHYqHSH/ljNHWd6RbQq0/QV99lF7D/wAXuHdOkl6pGmKa2rPLnGi2o7Ml1MQf4naZdQPyiQnUhbUrktN+8zMggtM/KbuJUKayLN1xPDkkfhwl3PvLG8tCUutuiImV01D7RqXCI2TtoRnDZlxBRkJicq/1cF+phGyen+ErC1pWoUZdW9l0Yx10smACYlDU59S+yov93JIz2p4b7vO0bZDLan9aZCsKa6NikTtc1NEgqbC2j+R+ApY3YR4DYUhZTlBjnkP+F/BNq6AfwkwAIJK3rhb3/goAAAAAElFTkSuQmCC",
+    r = 2 === window.devicePixelRatio && window.navigator.appVersion.match(/iphone/gi) ? 2 : 1,
+    s = a.logger,
+    l = a.goodShopUtil,
+    c = t.login.getUserNick(),
+    d = template("shops-list-template"),
+    p = {
+        cardIndex: 0,
+        festival: !1,
+        i: 0,
+        size: 20,
+        card: null,
+        cacheSimilarData: [],
+        firstPageData: null,
+        position: 1,
+        lastIndex: 0,
+        page: 0,
+        showLastCard: !1,
+        addLast: !1,
+        similarPrams: {},
+        api: {
+            1 : "getHomeShopData",
+            2 : "getTopicData",
+            3 : "getCategoryData",
+            4 : "getSimilarShopData"
+        },
+        init: function() {
+            var e = new t.httpurl(location.href);
+            if (t.env && t.env.aliapp) {
+                var r = l.isNewVersion() ? {
+                    icon: o
+                }: {
+                    title: "每日好店"
+                };
+                window.WindVane.call("WebAppInterface", "setCustomPageTitle", r,
+                function() {},
+                function() {})
+            }
+            p.renderFirstList(e),
+            setTimeout(function() {
+                p.setRightIcon(n);
+                var t = template("categorys-template"),
+                o = e.params.categoryId || 1001;
+                a.model.geHomeTopicsData({},
+                function(e) {
+                    for (var a = e.categorys,
+                    n = []; a.length;) n.push(a.splice(0, 3));
+                    i(t({
+                        categoryRows: n
+                    })).appendTo(document.body),
+                    document.addEventListener("TBNaviBar.rightItem.clicked",
+                    function() {
+                        var e = i(".category-box");
+                        e.toggleClass("enter"),
+                        e.find(".active").removeClass("active"),
+                        e.find(".t-" + o).addClass("active"),
+                        s.openCategory(),
+                        p._lazyLoadImg()
+                    },
+                    !1),
+                    document.getElementsByClassName("category-box")[0].addEventListener("webkitTransitionEnd",
+                    function() {
+                        p._lazyLoadImg()
+                    })
+                })
+            },
+            200),
+            i(document.body).on("tap", ".category-box a",
+            function() {
+                var e = this;
+                i(".category-box").removeClass("enter"),
+                setTimeout(function() {
+                    var a = e.getAttribute("data-categoryId");
+                    s.categoryItem(a);
+                    var i = new t.httpurl(e.getAttribute("data-href"));
+                    i.params.pageType = "1001" === a ? 1 : 3,
+                    "1001" === a && (i.params.categoryId = 1001),
+                    p._goto(i.toString(), !0)
+                },
+                100)
+            }).on("tap", ".category-box .close-dock",
+            function() {
+                i(".category-box").removeClass("enter").width()
+            }).on("tap", ".topic-entry",
+            function() {
+                s.clickLastCardToRecommendTopic()
+            })
+        },
+        setRightIcon: function(e) {
+            if (t.env && t.env.aliapp) {
+                var a = {
+                    icon: "sort",
+                    fromNative: "true",
+                    iconFont: "true",
+                    autoReset: !0
+                };
+                window.WindVane.call("WebAppInterface", "setNaviBarRightItem", a,
+                function() {},
+                function() {})
+            }
+        },
+        updateHeight: function() {
+            var e = document.documentElement.getBoundingClientRect().height,
+            t = 420 * r >= e;
+            i(document.body).css("height", e + (t ? 150 * r: 10 * r))
+        },
+        renderFirstList: function(e) {
+            var t = 1,
+            i = 0,
+            o = {
+                size: p.size,
+                page: p.page,
+                position: null
+            };
+            "1001" == e.params.categoryId && delete e.params.categoryId,
+            e.params.sellerId && (o.sellerId = e.params.sellerId),
+            e.params.itemId && (o.itemId = e.params.itemId),
+            e.params.topicId ? (i = e.params.topicId, o.subjectId = i, t = 2) : e.params.categoryId ? (i = e.params.categoryId, o.categoryId = i, t = 3) : e.params.similarShopId && (i = e.params.similarShopId, t = 4),
+            p.pageType = t,
+            p.id = i,
+            p.addListener(),
+            a.model[p.api[t]](o, p._render, a.goodShopUtil.noResultHandler)
+        },
+        _render: function(e) {
+            if (i(".loading").remove(), !e || !e.shopRecommends) return void i("#shop-list").html('<div class="no-result">服务端异常，请稍后再试!</div>');
+            "true" === e.double11Fenwei && (p.festival = !0, document.querySelector("body").className = "festival");
+            var t = p.renderShopItem(e),
+            a = e.goodShopHitText;
+            a || (a = e.categoryShopHitText ? e.categoryShopHitText: e.subjectShopHitText),
+            p.firstPageData = e,
+            window.firstPageData = e,
+            p.totalNum = parseInt(a.totalNum, 10),
+            1 === p.pageType ? p.initShopCard(t,
+            function(e) {
+                a.updateNum ? i("#pagination-wrapper").html('<div class="update">又捕获 </div><div class="page-number"><div id="page-info"><span>' + a.updateNum + '</span> 家</div></div><div class="shops"> 好店呦</div>') : i("#pagination-wrapper").html('<div class="update">上次看到第 </div><div class="page-number"><div id="page-info"><span>' + e + '</span> 个</div></div><div class="shops"> 好店呦</div>'),
+                i("#good-shop-box").addClass("notified"),
+                i(".page-number").animate({
+                    rotateY: "180deg"
+                },
+                500, "ease 0.5s",
+                function() {
+                    p.swipeHelper()
+                }),
+                i("#page-info").html("<span>" + e + "</span>/ <b>" + p.totalNum + "</b>").animate({
+                    rotateY: "180deg"
+                },
+                100, "ease")
+            }) : (i("#pagination-wrapper").html('<div class="page-number" style="line-height: 3.75rem"><div id="page-info" ><span>1</span>/ <b>' + p.totalNum + "</b></div></div>").css({
+                top: "-1.375rem",
+                height: "1.375rem"
+            }), i("#shop-list").css("margin-top", "1.25rem"), p.initShopCard(t,
+            function() {
+                p.swipeHelper()
+            }))
+        },
+        swipeHelper: function() {
+            p.card._moveCard( - 60, !0),
+            setTimeout(function() {
+                p.card._bounceBack()
+            },
+            1e3)
+        },
+        initShopCard: function(e, o) {
+            var n = new SwipeCard({
+                container: "#shop-list",
+                cards: e,
+                cardWidth: 8.75 * rem,
+                cardHeight: 12.5 * rem,
+                showIndex: 0,
+                offsetY: .125 * rem,
+                isAndroid: !t.env.os.isIOS,
+                pageNumber: 0
+            });
+            p.card = n;
+            var r = i("#shop-list li:first-child").find("section");
+            p.cardIndex = r.data("index"),
+            o && o(p.cardIndex),
+            1 === p.pageType && a.model.updatePosition(parseInt(p.cardIndex, 10));
+            var l = r.data("shopid");
+            l && s.cardExpose(p.pageType, p.id, c, l),
+            p._lazyLoadImg(),
+            n.addEventListener("cardChange",
+            function(e) {
+                var t = n.showIndex,
+                a = e.data.swipeLeft,
+                o = 0;
+                if (e.data.touchCard) {
+                    var r = e.data.touchCard.getElementsByClassName("shop-item"),
+                    l = p.getItems(e.data.touchCard.getElementsByClassName("baby"));
+                    o = p.cardIndex = parseInt(e.data.touchCard.querySelector("section").getAttribute("data-index"), 10),
+                    p.updateReaPosition(p.cardIndex, a),
+                    p.shopid = r && r[0] && r[0].getAttribute("data-shopId");
+                    var d = i("#shop-list li:nth-child(2)").find("section").data("shopid");
+                    s.cardExpose(p.pageType, p.id, c, d),
+                    o === p.totalNum && s.lastCardExpose(),
+                    p.onSwipeHandler(!0, p.shopid, l)
+                } else setTimeout(function() {
+                    var e = i("#shop-list li:last-child").find("section");
+                    p.shopid = e && e.data("shopid"),
+                    o = p.cardIndex = e && e.data("index"),
+                    p.updateReaPosition(p.cardIndex, a);
+                    var t = p.getItems(i("#shop-list li:last-child").find(".baby"));
+                    p.onSwipeHandler(!1, p.shopid, t)
+                },
+                300);
+                p.swipeLeft = a,
+                4 !== p.pageType && (p.prePageType = null),
+                p.lastIndex = t,
+                (4 !== p.pageType || t + 1 !== n.cards.length) && (p._lazyLoadImg(), t + 1 === n.cards.length && n.cards.length < p.totalNum && (n.disableSwipe(), p.page++, p.loadMoreCard(a, o)))
+            }),
+            n.addEventListener("loadLeftData",
+            function(e) {
+                if (! (p.cardIndex <= 1)) {
+                    var t = (n.showIndex, p.cardIndex);
+                    p.updateReaPosition(t - 1, !1),
+                    p.loadMoreCard(!1, t),
+                    p._lazyLoadImg()
+                }
+            })
+        },
+        getItems: function(e) {
+            for (var t = [], a = null, i = 0; i < e.length; i++) a = e[i].getAttribute("data-itemid"),
+            a && t.push(a);
+            return t.join(",")
+        },
+        loadMoreCard: function(e, o) {
+            i("#shop-list").append('<div class="loading"></div>');
+            var n = o && o + 1 < p.totalNum ? o + 1 : 0,
+            r = {
+                page: p.page,
+                size: p.size,
+                swipeLeft: e,
+                position: n
+            };
+            if (!e && !n) return void i(".loading").remove();
+            2 === p.pageType && (r.subjectId = p.id),
+            3 === p.pageType && (r.categoryId = p.id),
+            4 === p.pageType && (r.preShopId = p.id);
+            var s = new t.httpurl(location.href);
+            s.params.sellerId && (r.sellerId = s.params.sellerId),
+            s.params.itemId && (r.itemId = s.params.itemId),
+            a.model[p.api[p.pageType]](r,
+            function(t) {
+                p.firstPageData.shopRecommends = p.firstPageData.shopRecommends.concat(t.shopRecommends),
+                i(".loading").remove();
+                var a = p.card;
+                if (a.enableSwipe(), t && t.shopRecommends) {
+                    if (e) a.addCard(p.renderShopItem(t));
+                    else {
+                        p.shopid = t.shopRecommends[t.shopRecommends.length - 1].shopId;
+                        for (var o = t.shopRecommends[t.shopRecommends.length - 1].shopItems, n = [], r = 0; r < o.length; r++) n.push(o[r].itemId);
+                        n = n.join(",");
+                        var s = p.renderShopItem(t);
+                        a.beforeAddCard(s),
+                        a.showCardAt(s.length - 1, !0, !0),
+                        p.onSwipeHandler(!1, p.shopid, n)
+                    }
+                    setTimeout(function() {
+                        p._lazyLoadImg()
+                    },
+                    10)
+                }
+            },
+            a.goodShopUtil.noResultHandler)
+        },
+        onSwipeHandler: function(e, t, a) {
+            s[e ? "logLeftSlide": "logRightSlide"](p.pageType, p.id, c, t, a)
+        },
+        updateReaPosition: function(e, t) {
+            if (4 !== p.pageType) {
+                if (!e) return void i("#page-info").removeClass("updates").find("span").html(1);
+                if (e = parseInt(e, 10), e === p.totalNum) return void i("#page-info").addClass("updates").find("span").html("更新预告");
+                1 === p.pageType && a.model.updatePosition(e),
+                t && e++,
+                i("#page-info").removeClass("updates").find("span").html(e)
+            }
+        },
+        updateShopCard: function(e, t) {
+            p.card && (p.card.removeAllCards(), p.card.addCard(e), p.card.showCardAt(t || 0, !0, !0), p._lazyLoadImg())
+        },
+        addListener: function() {
+            var e = !0,
+            o = !0,
+            n = 0,
+            r = null;
+            p.prePageType = null;
+            var l = location.href.substring(0, location.href.indexOf(".html") + 5);
+            i(document.body).on("tap", ".similar-shop-btn",
+            function() {
+                var t = i(this),
+                l = t.closest("li"),
+                d = t.attr("data-shopId"),
+                u = i(this).parent().clone();
+                null === p.prePageType && (p.prePageType = p.pageType, r = p.id, n = p.lastIndex),
+                p.id = d,
+                p.pageType = 4,
+                l.siblings("li").remove(),
+                i("#pagination-wrapper").hide(),
+                i("#shop-list li").html(u).css({
+                    "background-color": "#ddd",
+                    border: "none"
+                });
+                var g = function() {
+                    l.css({
+                        "background-color": "#fff",
+                        border: "1px solid #ccc"
+                    }),
+                    u[0].style.cssText = "",
+                    i("#shop-list li").length <= 1 && i("#shop-list").html('<div class="loading"></div>')
+                };
+                p.doShopAnimate(u, !0, g),
+                setTimeout(g, 300),
+                p.doNameAnimate(i("#similar-shop-name"), !1);
+                var h = {
+                    preShopId: d,
+                    page: 0,
+                    size: 30
+                };
+                p.similarPrams = h,
+                a.model.getSimilarShopData(h,
+                function(e) {
+                    p.cacheSimilarData.push(e),
+                    i(".loading").remove(),
+                    i("#similar-shop-name").remove();
+                    var t = e.similarShopHitText;
+                    if (i('<p class="similar-shop-name" id="similar-shop-name"><span class="logo" style="background-image: url(' + t.preShopLogoUrl + ')"></span><span class="ellipsis name">' + t.preShopName + "</span><i></i></p>").insertBefore("#shop-list").show(), p.doNameAnimate(i("#similar-shop-name"), !0), o) {
+                        i('<span class="similar-helper"></span>').appendTo(i("#similar-shop-name")),
+                        o = !1,
+                        setTimeout(function() {
+                            i(".similar-helper").remove()
+                        },
+                        3e3);
+                        var a = function() {
+                            i(".similar-helper").remove(),
+                            i(document.body).off("tap", document.body, a)
+                        };
+                        i(document.body).on("tap", document.body, a)
+                    }
+                    p.updateShopCard(p.renderShopItem(e)),
+                    document.body.scrollTop = 0
+                }),
+                e = !0,
+                s.logClickSimilarBtn(p.pageType, p.id, c, d)
+            }).on("tap", ".similar-shop-name",
+            function() {
+                s.logClickSimilarName(p.pageType, p.id),
+                p.doNameAnimate(i("#similar-shop-name"), !1),
+                e && (p.cacheSimilarData.pop(), e = !1),
+                i("#shop-list").html('<div class="loading"></div>'),
+                i("#shop-list .loading").animate({
+                    scale: "1,1"
+                },
+                300, "ease-in-out");
+                var t = p.cacheSimilarData.pop();
+                return ! t && p.firstPageData ? (p.pageType = p.prePageType, t = p.firstPageData, p.id = r, i("#pagination-wrapper").show(), i("#similar-shop-name").remove(), setTimeout(function() {
+                    p.updateShopCard(p.renderShopItem(t), n)
+                },
+                200), void i(".loading").remove()) : (t.similarShopHitText && t.similarShopHitText.preShopId && (p.id = t.similarShopHitText.preShopId), t && setTimeout(function() {
+                    var e = t.similarShopHitText;
+                    e && i("#similar-shop-name").html('<span class="logo" style="background-image: url(' + e.preShopLogoUrl + ')"></span><span class="ellipsis name">' + e.preShopName + "</span><i></i>"),
+                    p.doNameAnimate(i("#similar-shop-name"), !0),
+                    p.updateShopCard(p.renderShopItem(t)),
+                    i(".loading").remove()
+                },
+                200), void(e = !1))
+            }).on("tap", "li a.baby",
+            function(e) {
+                var a = i(this),
+                o = a.closest("li").find(".shop-item").attr("data-shopId") || 0;
+                a.hasClass("title") ? s.logToShop(p.pageType, p.id, c, o) : a.hasClass("baby") && s.logToDetail(p.pageType, p.id, c, o, i(e.target).data("itemid"));
+                var n = a.attr("data-href");
+                if (n) {
+                    var r = new t.httpurl(n),
+                    l = p.id;
+                    4 === p.pageType ? l = 200 : 1 === p.pageType && (l = 100),
+                    r.params.spm = window.spm + "." + p.pageType + "." + l,
+                    location.href = r.toString()
+                }
+            }).on("tap", ".tab-topic",
+            function() {
+                a.logger.logClickTabTopic(p.pageType);
+                var e = new t.httpurl(a.url.topic);
+                p.festival && (e.params.festival = !0),
+                setTimeout(function() {
+                    p._goto(e.toString(), !0)
+                },
+                150)
+            }).on("tap", ".tab-shop",
+            function() {
+                a.logger.logClickTabGoodShop(p.pageType);
+                var e = new t.httpurl(l);
+                setTimeout(function() {
+                    p._goto(e.toString())
+                },
+                150)
+            }).on("tap", ".home",
+            function() {
+                a.logger.logClickToRecommendBtn();
+                var e = location.href.substring(0, location.href.indexOf(".html") + 5),
+                i = new t.httpurl(e);
+                i.params.title = "发现好店",
+                setTimeout(function() {
+                    location.href = i.toString()
+                },
+                10)
+            }).on("tap", ".account-box",
+            function() {
+                a.logger.logClickToDaren();
+                var e = i(this).attr("data-href");
+                setTimeout(function() {
+                    location.href = e
+                },
+                150)
+            }).on("tap", ".topic-item-wrapper",
+            function(e) {
+                if (!i(e.target).parents(".account-box").length) {
+                    a.logger.logClickgoodShopTopic();
+                    var o = i(this),
+                    n = l.replace("/goodshop", "/topic-details"),
+                    r = new t.httpurl(n);
+                    r.params.subjectId = i(this)[0].getAttribute("data-topicId"),
+                    r.params.title = o.find(".topic-name").html() || "",
+                    r.params.pageType = 2,
+                    setTimeout(function() {
+                        window.location.href = r.toString()
+                    },
+                    150)
+                }
+            })
+        },
+        renderShopItem: function(e) {
+            if (e) {
+                for (var t = e.shopRecommends,
+                a = [], i = 0, o = t.length; o > i; i++) {
+                    var n = document.createElement("li");
+                    n.className = "shop-wrapper",
+                    n.setAttribute("data-id", i),
+                    n.innerHTML = d(t[i]),
+                    a.push(n)
+                }
+                return a
+            }
+        },
+        renderOneTopic: function(e) {
+            var t = document.createElement("li");
+            return t.className = "shop-wrapper topic-wrapper-flag",
+            t.setAttribute("data-id", 3),
+            t.innerHTML = renderTopicItem(e),
+            t
+        },
+        doNameAnimate: function(e, t, a) {
+            i(e).animate({
+                opacity: t ? 1 : 0
+            },
+            300, "ease-in-out",
+            function() {
+                a && a()
+            })
+        },
+        doShopAnimate: function(e, t, a) {
+            i(e).animate({
+                scale: t ? "0,0": "1,1"
+            },
+            300, "ease-out",
+            function() {
+                a && a()
+            })
+        },
+        _goto: function(e, t) {
+            t ? window.location.replace(e) : window.location.href = e
+        },
+        _lazyLoadImg: function() {
+            this.libImg || (this.libImg = t.img({
+                "class": "lib-img",
+                size: "320x320",
+                dataSrc: "data-src",
+                sharpen: "s150",
+                q: ["q90", "q60"],
+                enableLazyload: !0,
+                enalbeIOSWifiLoadMore: !0
+            })),
+            this.libImg.fireLazyload()
+        }
+    };
+    p.init()
+} (window, window.lib || (window.lib = {}), window.app || (window.app = {}));
+</script>
+
+</body>
+</html>
